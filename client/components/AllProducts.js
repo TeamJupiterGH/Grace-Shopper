@@ -13,14 +13,16 @@ export class AllProducts extends React.Component {
     console.log('this is products!! ---->', products);
 
     return (
-      <div>
+      <div className='grid-container'>
         {products.map(({ id, name, price, description, imageUrl }) => (
-          <div key={id}>
+          <div key={id} className='grid-item'>
             <Link to={`/products/${id}`}>
+            <div className='link'>
             <h2>Name: {name}</h2>
             <h2>Price: ${price}</h2>
             <h2>Description: {description}</h2>
             <img src={imageUrl} />
+            </div>
             </Link>
           </div>
         ))}

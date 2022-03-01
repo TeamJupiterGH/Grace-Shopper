@@ -19,7 +19,9 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({ name: 'choco chip cookie', description: 'a warm fluffy delicious cookie', price: 1.99 }),
-    Product.create({ name: 'blueberry scone', description: 'scone', price: 3.00 })
+    Product.create({ name: 'blueberry scone', description: 'scone', price: 3.00 }),
+    Product.create({ name: 'lemon cake donut', description: 'soft, zesty donut', price: 1.00 }),
+    Product.create({ name: 'pumpkin pie', description: 'fresh pumpkin pie', price: 4.00 })
   ])
 
   console.log(`seeded ${users.length} users`)
@@ -32,7 +34,9 @@ async function seed() {
     },
     products: {
       cookie: products[0],
-      scone: products[1]
+      scone: products[1],
+      donut: products[2],
+      pumpkinPie: products[3],
     }
   }
 }

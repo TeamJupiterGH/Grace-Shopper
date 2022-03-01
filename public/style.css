@@ -19,3 +19,25 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
+  grid-template-columns: auto auto auto;
+  padding: 50px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px solid#E2BC97;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.link {
+  font-family: ‘Open Sans’, Sans-serif;
+  font-size: 16px;
+  color:#333;
+  text-decoration: none;
+}
