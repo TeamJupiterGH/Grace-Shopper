@@ -26,7 +26,7 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING(2000),
-    defaultValue: 'default.png',
+    defaultValue: 'https://i.imgur.com/KxJ6Z14.jpg',
   },
 });
 
