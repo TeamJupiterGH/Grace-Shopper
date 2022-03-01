@@ -14,11 +14,12 @@ export class AllProducts extends React.Component {
 
     return (
       <div>
-        {products.map(({ id, name, price, description }) => (
+        {products.map(({ id, name, price, description, imageUrl }) => (
           <div key={id}>
             <h2>Name: {name}</h2>
             <h2>Price: ${price}</h2>
             <h2>Description: {description}</h2>
+            <img src={imageUrl} />
           </div>
         ))}
       </div>
