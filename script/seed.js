@@ -27,22 +27,22 @@ async function seed() {
   const product1 = await Product.create({
     name: "choco chip cookie",
     description: "a warm fluffy delicious cookie",
-    price: 1.99,
+    price: 199,
   });
   const product2 = await Product.create({
     name: "blueberry scone",
     description: "scone",
-    price: 3.0,
+    price: 300,
   });
   const product3 = await Product.create({
     name: "lemon cake donut",
     description: "soft, zesty donut",
-    price: 1.0,
+    price: 100,
   });
   const product4 = await Product.create({
     name: "pumpkin pie",
     description: "fresh pumpkin pie",
-    price: 4.0,
+    price: 400,
   });
 
   const order1 = await Order.create({});
