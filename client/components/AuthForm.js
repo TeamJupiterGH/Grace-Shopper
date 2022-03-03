@@ -105,16 +105,25 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name;
       const username = evt.target.username.value;
       const password = evt.target.password.value;
-      // 
+      dispatch(authenticate(username, password, formName));
+    },
+  };
+};
+
+const mapDispatchh = (dispatch) => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const username = evt.target.username.value;
+      const password = evt.target.password.value; 
       const firstName = evt.target.firstName.value;
       const lastName = evt.target.lastName.value;
       const email = evt.target.email.value
       dispatch(authenticate(username, password, formName, firstName, lastName, email));
-
-      // dispatch(authenticate(username, password, formName));
     },
   };
 };
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export const Signup = connect(mapSignup, mapDispatchh)(AuthForm);
