@@ -98,7 +98,7 @@ const mapSignup = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatchLogin = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
@@ -110,7 +110,7 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-const mapDispatchh = (dispatch) => {
+const mapDispatchSignup = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
@@ -125,5 +125,5 @@ const mapDispatchh = (dispatch) => {
   };
 };
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatchh)(AuthForm);
+export const Login = connect(mapLogin, mapDispatchLogin)(AuthForm);
+export const Signup = connect(mapSignup, mapDispatchSignup)(AuthForm);
