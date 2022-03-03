@@ -45,7 +45,7 @@ async function seed() {
     price: 400,
   });
 
-  const order1 = await Order.create({});
+  const order1 = await Order.create({ complete: true });
   const order2 = await Order.create({});
 
   await user1.addOrder([order1, order2]);
