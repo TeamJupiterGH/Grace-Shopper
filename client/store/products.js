@@ -34,7 +34,7 @@ export const fetchProducts = () => {
 export const _deleteProduct = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`/api/products/${id}`);
+      const { data } = await axios.delete(`/auth/${id}`);
       dispatch(deleteProduct(data));
       history.push('/products')
     } catch (err) {
@@ -51,9 +51,9 @@ export default function productsReducer(state = initialState, action) {
     case SET_PRODUCTS:
       return action.products;
     case DELETE_PRODUCT:
-      return [...state].filter((item) => {
-        item.id !== action.product.id;
-      });
+      return [...state].filter((item) => 
+        item.id !== action.product.id
+      );
     default:
       return state;
   }
