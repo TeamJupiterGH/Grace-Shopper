@@ -4,6 +4,15 @@ const {
 } = require("../db");
 module.exports = router;
 
+router.get('/', async (req, res, next) => {
+  try {
+    const products = await Product.findAll()
+    res.json(products)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get("/:id", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
@@ -22,16 +31,6 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
-  try {
-    const productToBeDeleted = await Product.findByPk(req.params.id);
-    await productToBeDeleted.destroy();
-    res.send(productToBeDeleted);
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.put("/:id", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
@@ -42,11 +41,12 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.get('/', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    const products = await Product.findAll()
-    res.json(products)
-  } catch (err) {
-    next(err)
+    const productToBeDeleted = await Product.findByPk(req.params.id);
+    await productToBeDeleted.destroy();
+    res.send(productToBeDeleted);
+  } catch (error) {
+    next(error);
   }
-})
+});
