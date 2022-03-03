@@ -52,7 +52,7 @@ router.put("/:id", async(req, res, next) => {
   try{
     const user = await User.findByPk(req.params.id);
     await user.update(req.body);
-    res.json(product);
+    res.json(user);
   } catch(error) {
     next(error);
   }
