@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { models: {User }} = require('../db')
+const { requireToken, isAdmin } = require('../api/authentication')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -9,7 +10,6 @@ router.post('/login', async (req, res, next) => {
     next(err)
   }
 })
-
 
 router.post('/signup', async (req, res, next) => {
   try {
@@ -32,3 +32,21 @@ router.get('/me', async (req, res, next) => {
     next(ex)
   }
 })
+
+router.get('/new', async (req, res, next) => {
+  try {
+    res.send('hi')
+  } catch (ex) {
+    next(ex)
+  }
+})
+
+router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
+  try {
+    const productToBeDeleted = await Product.findByPk(req.params.id);
+    await productToBeDeleted.destroy();
+    res.send(productToBeDeleted);
+  } catch (error) {
+    next(error);
+  }
+});

@@ -24,6 +24,17 @@ async function seed() {
     email: "sara@gmail.com",
   });
 
+  const user2 = await // User.create({ username: 'cody', password: '123' }),
+  // User.create({ username: 'murphy', password: '123' }),
+  User.create({
+    username: "EB",
+    password: "123",
+    firstName: "EB",
+    lastName: "Hong",
+    email: "EB@gmail.com",
+    isAdmin: true
+  });
+
   const product1 = await Product.create({
     name: "choco chip cookie",
     description: "a warm fluffy delicious cookie",

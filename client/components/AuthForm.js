@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { authenticate} from '../store';
+import { authenticate } from '../store';
+
 
 /**
  * COMPONENT
@@ -8,6 +9,7 @@ import { authenticate} from '../store';
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
+  return (
   if (displayName === 'Sign Up') {
     return (
       <div>
@@ -99,6 +101,7 @@ const mapSignup = (state) => {
 };
 
 const mapDispatchLogin = (dispatch) => {
+
   return {
     handleSubmit(evt) {
       evt.preventDefault();
@@ -109,6 +112,7 @@ const mapDispatchLogin = (dispatch) => {
     },
   };
 };
+
 
 const mapDispatchSignup = (dispatch) => {
   return {

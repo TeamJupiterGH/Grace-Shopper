@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../store/products";
+import { fetchProducts, _deleteProduct } from "../store/products";
 import { fetchCart } from "../store/cart";
+
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts();
@@ -10,9 +11,10 @@ export class AllProducts extends React.Component {
       this.props.fetchCart(this.props.user.id);
     }
   }
+
   render() {
     const { products } = this.props;
-
+    
     return (
       <div className="grid-container">
         {products.map(({ id, name, price, description, imageUrl }) => (
@@ -25,6 +27,18 @@ export class AllProducts extends React.Component {
                 <img src={imageUrl} />
               </div>
             </Link>
+            {this.props.isAdmin ? (
+
+              <button
+                onClick={() => {
+                  this.props.deleteProduct(id);
+                }}
+              >
+                Delete
+              </button>
+            ) : (
+              <div></div>
+            )}
           </div>
         ))}
       </div>
@@ -37,12 +51,14 @@ const mapState = (state) => {
     user: state.auth,
     isLoggedIn: !!state.auth.id,
     products: state.products,
+    isAdmin: state.auth.isAdmin,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
+    deleteProduct: (id) => dispatch(_deleteProduct(id)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
