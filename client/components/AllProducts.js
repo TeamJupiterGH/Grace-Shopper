@@ -2,15 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
-
+import { fetchCart } from "../store/cart";
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts();
+    if (this.props.isLoggedIn) {
+      this.props.fetchCart(this.props.user.id);
+    }
   }
   render() {
     const { products } = this.props;
-    console.log("this is props!! ---->", this.props);
-    console.log("this is products!! ---->", products);
 
     return (
       <div className="grid-container">
@@ -33,6 +34,8 @@ export class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
+    user: state.auth,
+    isLoggedIn: !!state.auth.id,
     products: state.products,
   };
 };
@@ -40,6 +43,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 
