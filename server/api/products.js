@@ -1,19 +1,21 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Product },
-} = require("../db");
+} = require('../db');
+const { requireToken, isAdmin } = require('../api/authentication');
+
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll()
-    res.json(products)
+    const products = await Product.findAll();
+    res.json(products);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     res.json(product);
@@ -22,7 +24,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post('/', requireToken, isAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
     res.status(201).send(newProduct);
@@ -31,7 +33,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
     await product.update(req.body);
@@ -41,7 +43,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const productToBeDeleted = await Product.findByPk(req.params.id);
     await productToBeDeleted.destroy();
