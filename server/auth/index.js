@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: {User }} = require('../db')
+const { models: {User, Product }} = require('../db')
 const { requireToken, isAdmin } = require('../api/authentication')
 module.exports = router
 

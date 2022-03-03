@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+
+const TOKEN = 'token'
+
 //ACTION TYPE
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
@@ -33,8 +36,15 @@ export const fetchProducts = () => {
 
 export const _deleteProduct = (id) => {
   return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
     try {
-      const { data } = await axios.delete(`/auth/${id}`);
+      const { data } = await axios.delete(`/auth/${id}`, 
+      {
+        headers: {
+          authorization: token
+        }
+      }
+      );
       dispatch(deleteProduct(data));
       history.push('/products')
     } catch (err) {

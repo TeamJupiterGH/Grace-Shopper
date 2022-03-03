@@ -18,6 +18,8 @@ const setAuth = auth => ({type: SET_AUTH, auth})
  */
 export const me = () => async dispatch => {
   const token = window.localStorage.getItem(TOKEN)
+  console.log('window storage', window.localStorage);
+  console.log('this is token', token);
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
@@ -29,9 +31,12 @@ export const me = () => async dispatch => {
 }
 
 export const authenticate = (username, password, method, firstName, lastName, email) => async dispatch => {
+  
   try {
     const res = await axios.post(`/auth/${method}`, {username, password, firstName, lastName, email})
+    console.log('res data token', res.data.token);
     window.localStorage.setItem(TOKEN, res.data.token)
+    console.log('res data token second time!', res.data.token);
     dispatch(me());
     history.push('/products')
   } catch (authError) {
