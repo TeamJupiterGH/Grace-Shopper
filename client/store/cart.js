@@ -77,7 +77,7 @@ export default function addToCartReducer(state = initialState, action) {
       return {
         ...state,
         products: state.products.filter(
-          (item) => item.id !== action.product.item.id
+          (item) => item.id !== action.item.productId
         ),
       };
     default:
