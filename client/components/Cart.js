@@ -24,7 +24,8 @@ class Cart extends React.Component {
               <h1>{item.name}</h1>
               <img src={item.imageUrl} />
               <div>${item.price / 100}</div>
-              <button type= "submit" onClick = {() => this.props.deleteItemInCart(this.props.match.params.userId, item)}> Delete</button>
+              <button type= "submit" onClick = {() =>
+               this.props.deleteItemInCart(this.props.match.params.userId, item)}> Delete</button>
             </div>
           ))}
 

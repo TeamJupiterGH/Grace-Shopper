@@ -53,7 +53,9 @@ export const fetchCart = (userId) => {
 export const deleteItemInCart = (userId, item) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`/${userId}/cart/${item.id}`);
+      const { data } = await axios.delete(
+        `/api/users/${userId}/cart/${item.id}`
+      );
       dispatch(_deleteItemInCart(data));
     } catch (error) {
       console.log(error);
@@ -72,9 +74,12 @@ export default function addToCartReducer(state = initialState, action) {
     case ADD_TO_CART:
       return action.item;
     case DELETE_ITEM_IN_CART:
-    console.log('this is state!!', {...state, products: state.products.filter((item) => item.id !== action.item.id)});
-      return {...state, products: state.products.filter((item) => {console.log('this is item.id',item.id); console.log('this is action.item', action);
-      return(item.id !== action.item.id)})};
+      return {
+        ...state,
+        products: state.products.filter(
+          (item) => item.id !== action.product.item.id
+        ),
+      };
     default:
       return state;
   }
