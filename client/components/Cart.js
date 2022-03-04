@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 //-------
-import { fetchCart } from "../store/cart";
+import { fetchCart, deleteItemInCart } from "../store/cart";
 class Cart extends React.Component {
   //-------
   componentDidMount() {
@@ -10,6 +10,7 @@ class Cart extends React.Component {
     // const userId = this.props.user.id;
     const userId = this.props.match.params.userId;
     this.props.fetchCart(userId);
+    console.log('this is props---->', this.props)
   }
   render() {
     if (
@@ -23,6 +24,7 @@ class Cart extends React.Component {
               <h1>{item.name}</h1>
               <img src={item.imageUrl} />
               <div>${item.price / 100}</div>
+              <button type= "submit" onClick = {() => this.props.deleteItemInCart(this.props.match.params.userId, item)}> Delete</button>
             </div>
           ))}
 
@@ -44,6 +46,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCart: (userId) => dispatch(fetchCart(userId)),
+    deleteItemInCart: (userId, item) => dispatch(deleteItemInCart(userId, item))
   };
 };
 
