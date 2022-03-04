@@ -11,8 +11,7 @@ router.get("/", async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: ["id", "username"],
-    }
-    );
+    });
     res.json(users);
   } catch (err) {
     next(err);
@@ -36,9 +35,12 @@ router.get("/:userId/cart", async (req, res, next) => {
 router.post("/:userId/cart", async (req, res, next) => {
   const userId = req.params.userId;
   try {
-    const order = await Order.findOne({
+    let order = await Order.findOne({
       where: { userId: userId, complete: false },
     });
+    if (!order) {
+      order = await Order.create({ userId: userId });
+    }
     await Order_Details.create({
       orderId: order.id,
       productId: req.body.id,
