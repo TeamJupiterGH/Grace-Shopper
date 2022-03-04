@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts, _deleteProduct } from "../store/products";
+import { fetchProducts, _deleteProduct, _addProduct, _editProduct } from "../store/products";
 import { fetchCart } from "../store/cart";
 
 export class AllProducts extends React.Component {
@@ -60,6 +60,8 @@ const mapDispatch = (dispatch) => {
     getProducts: () => dispatch(fetchProducts()),
     deleteProduct: (id) => dispatch(_deleteProduct(id)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
+    editProduct: (product, id) => dispatch(_editProduct(product, id)),
+    addProduct: (product) => dispatch(_addProduct(product)),
   };
 };
 
