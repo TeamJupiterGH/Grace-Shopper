@@ -38,7 +38,7 @@ export const _deleteProduct = (id) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
-      const { data } = await axios.delete(`/auth/${id}`, 
+      const { data } = await axios.delete(`/api/products/${id}`, 
       {
         headers: {
           authorization: token

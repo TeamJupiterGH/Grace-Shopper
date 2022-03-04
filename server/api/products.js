@@ -43,18 +43,7 @@ router.put('/:id', requireToken, isAdmin, async (req, res, next) => {
   }
 });
 
-// router.delete('/:id', async (req, res, next) => {
-//   try {
-//     const productToBeDeleted = await Product.findByPk(req.params.id);
-//     await productToBeDeleted.destroy();
-//     res.send(productToBeDeleted);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-
-router.delete('/:id', requireToken, async (req, res, next) => {
+router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
   try {
     const productToBeDeleted = await Product.findByPk(req.params.id);
     await productToBeDeleted.destroy();
