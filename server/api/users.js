@@ -1,16 +1,16 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { User, Order, Order_Details, Product },
-} = require("../db");
+} = require('../db');
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ["id", "username"],
+      attributes: ['id', 'username'],
     });
     res.json(users);
   } catch (err) {
@@ -18,7 +18,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:userId/cart", async (req, res, next) => {
+router.get('/:userId/cart', async (req, res, next) => {
   const userId = req.params.userId;
   try {
     const order = await Order.findOne({
@@ -32,7 +32,7 @@ router.get("/:userId/cart", async (req, res, next) => {
   }
 });
 
-router.post("/:userId/cart", async (req, res, next) => {
+router.post('/:userId/cart', async (req, res, next) => {
   const userId = req.params.userId;
   try {
     let order = await Order.findOne({
@@ -52,6 +52,25 @@ router.post("/:userId/cart", async (req, res, next) => {
     });
 
     res.send(updatedOrder);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/:userId/cart/:productId', async (req, res, next) => {
+  const userId = req.params.userId;
+  const productId = req.params.productId;
+  try {
+    let order = await Order.findOne({
+      where: { userId: userId, complete: false },
+    });
+
+    let productToBeDeleted = await Order_Details.findOne({
+      where: { productId: productId, orderId: order.id },
+    });
+
+    await productToBeDeleted.destroy();
+    res.send(productToBeDeleted);
   } catch (error) {
     next(error);
   }
