@@ -1,18 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({
-  handleClick,
-  isLoggedIn,
-  userId,
-  itemsInCart,
-  itemsInCartForGuest,
-}) => {
+const Navbar = ({ handleClick, isLoggedIn, userId, itemsInCart }) => {
   const productArr = itemsInCart.products || [];
-  const productArrForGuest = itemsInCartForGuest || [];
-  console.log("itemsInCartForGuestArr", itemsInCartForGuest.length);
+
+  const numberOfItemsInCart = JSON.parse(
+    localStorage.getItem("tempCart")
+  ).length;
+
   return (
     <div>
       <h1>Half Baked</h1>
@@ -32,7 +29,7 @@ const Navbar = ({
             <Link to="/products">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <Link to="/guest/cart">Cart ({productArrForGuest.length})</Link>
+            <Link to="/guest/cart">Cart ({numberOfItemsInCart})</Link>
           </div>
         )}
       </nav>
@@ -48,7 +45,6 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
     itemsInCart: state.itemsInCart,
-    itemsInCartForGuest: state.itemsInCartForGuest,
   };
 };
 
