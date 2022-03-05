@@ -29,19 +29,22 @@ export class AllProducts extends React.Component {
               </div>
             </Link>
             {this.props.isAdmin ? (
-
+              <div>
+              <AddProduct />
               <button
                 onClick={() => {
                   this.props.deleteProduct(id);
                 }}
               >
                 Delete
-              </button>
+              </button></div>
             ) : (
               <div></div>
             )}
+            
           </div>
         ))}
+        
       </div>
     );
   }

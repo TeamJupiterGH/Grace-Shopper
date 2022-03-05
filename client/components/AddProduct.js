@@ -22,22 +22,23 @@ export class AddProduct extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.AddProduct({ ...this.state });
+    this.props.addProduct({ ...this.state });
     this.setState({ name: "", description: "", price: 0})
   }
 
+
   render() {
-    const { products } = this.props;
-    const { name } = this.state;
     const { handleSubmit, handleChange } = this;
+    const { name, description, price } = this.state;
+  
     return (
       <form id="add-product-form" onSubmit={handleSubmit}>
         <label htmlFor="name">Add New Product:</label>
-        {/* <input name="name" onChange={handleChange} value={name} />
+        <input name="name" onChange={handleChange} value={name} />
         <label htmlFor="description">Description</label>
         <input name="description" onChange={handleChange} value={description} />
         <label htmlFor="price">Price</label>
-        <input name="price" onChange={handleChange} value={price} /> */}
+        <input name="price" onChange={handleChange} value={price} />
         <button type="submit">Submit</button>
         <Link to="/">Cancel</Link>
       </form>
