@@ -32,16 +32,24 @@ export class AddProduct extends React.Component {
     const { name, description, price } = this.state;
   
     return (
+      <div>
+      <div className="add-new-product"><label htmlFor="add-product-header">Add New Product</label>
+        </div>
+
       <form id="add-product-form" onSubmit={handleSubmit}>
-        <label htmlFor="name">Add New Product:</label>
+        <label htmlFor="name">Name</label>
         <input name="name" onChange={handleChange} value={name} />
+
         <label htmlFor="description">Description</label>
         <input name="description" onChange={handleChange} value={description} />
+
         <label htmlFor="price">Price</label>
         <input name="price" onChange={handleChange} value={price} />
-        <button type="submit">Submit</button>
-        <Link to="/">Cancel</Link>
+        
+        &nbsp;&nbsp; <button type="submit">Submit</button>
+        {/* <Link to="/">Cancel</Link> */}
       </form>
+      </div>
     );
   }
 }

@@ -34,6 +34,19 @@ form div {
   font-size: 30px;
   text-align: center;
 }
+.grid-item-add-product {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px solid#E2BC97;
+  padding: 20px;
+  font-size: 16px;
+  font-family: ‘Open Sans’, Sans-serif;
+  text-align: center;
+}
+.add-new-product {
+  padding: 20px;
+  font-size: 30px;
+  font-family: ‘Open Sans’, Sans-serif;
+}
 
 .link {
   font-family: ‘Open Sans’, Sans-serif;
