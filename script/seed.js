@@ -36,22 +36,25 @@ async function seed() {
   });
 
   const product1 = await Product.create({
-    name: "choco chip cookie",
+    name: "Chocolate Chip Cookie",
     description: "a warm fluffy delicious cookie",
     price: 199,
+    imageUrl: "https://i.imgur.com/KxJ6Z14.jpg"
   });
   const product2 = await Product.create({
-    name: "blueberry scone",
+    name: "Blueberry Scone",
     description: "scone",
     price: 300,
+    imageUrl: "https://i.imgur.com/zog6fwt.jpg?1"
   });
   const product3 = await Product.create({
-    name: "lemon cake donut",
+    name: "Lemon Cake Donut",
     description: "soft, zesty donut",
     price: 100,
+    imageUrl: "https://i.imgur.com/wyGlK2T.jpg?1"
   });
   const product4 = await Product.create({
-    name: "pumpkin pie",
+    name: "Pumpkin Pie",
     description: "fresh pumpkin pie",
     price: 400,
   });

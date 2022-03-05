@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 export class EditProduct extends Component {
   constructor(props) {
+      console.log("constructor props", props)
     super(props);
     this.state = {};
 
@@ -21,10 +22,11 @@ export class EditProduct extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.editProduct({ ...this.state });
+    //this.props.editProduct({ ...this.state });
   }
 
   render() {
+    console.log("Edit Product props", this.props)
     const { handleSubmit, handleChange } = this;
     return (
       <div>

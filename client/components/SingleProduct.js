@@ -45,7 +45,8 @@ class SingleProduct extends React.Component {
         )}
         {/* {product.isAdmin ? ( */}
           <div>
-            <EditProduct/>
+            <EditProduct
+            product={product}/>
           </div>
       {/* ) : (
         <div></div>
