@@ -6,10 +6,9 @@ import { logout } from "../store";
 const Navbar = ({ handleClick, isLoggedIn, userId, itemsInCart }) => {
   const productArr = itemsInCart.products || [];
 
-  const numberOfItemsInCart = JSON.parse(
-    localStorage.getItem("tempCart")
-  ).length;
-
+  const numberOfItemsInCart =
+    JSON.parse(localStorage.getItem("tempCart")) || [];
+  const numberOfItemsInCartLength = numberOfItemsInCart.length;
   return (
     <div>
       <h1>Half Baked</h1>
@@ -29,7 +28,7 @@ const Navbar = ({ handleClick, isLoggedIn, userId, itemsInCart }) => {
             <Link to="/products">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
-            <Link to="/guest/cart">Cart ({numberOfItemsInCart})</Link>
+            <Link to="/guest/cart">Cart ({numberOfItemsInCartLength})</Link>
           </div>
         )}
       </nav>

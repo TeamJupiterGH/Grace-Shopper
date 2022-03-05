@@ -10,10 +10,8 @@ class SingleItemInCart extends React.Component {
   }
   componentDidUpdate(prevProps) {
     const item = this.props.item;
-    console.log("PREV PROPS ITEMSINCART", prevProps.item.id);
-    console.log("THIS PROPS ITEMSINCART", this.props.item.id);
+    console.log("EVER GET IN HERE?");
     if (prevProps.item.id !== this.props.item.id) {
-      console.log("EVER GET IN HERE? ");
       this.setState(
         {
           quantity:
