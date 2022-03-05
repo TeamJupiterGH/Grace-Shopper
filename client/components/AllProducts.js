@@ -41,15 +41,15 @@ export class AllProducts extends React.Component {
             )}
           </div>
         ))}
-        <div className='grid-item-add-product'>
         {this.props.isAdmin ? (
           <div>
+            <div className='grid-item-add-product'>
             <AddProduct />
+            </div>
           </div>
         ) : (
           <div></div>
         )}
-        </div>
       </div>
     );
   }

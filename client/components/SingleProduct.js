@@ -4,6 +4,8 @@ import { fetchSingleProduct } from "../store/singleProduct";
 import { Link } from "react-router-dom";
 import { addToCart } from "../store/cart";
 import { addItemToGuestCart } from "../store/cartForGuest";
+import { EditProduct } from "./EditProduct";
+import  { _editProduct } from '../store/products' 
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -22,15 +24,16 @@ class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
+
   render() {
     const product = this.props.product;
     const userId = this.props.user.id;
     return (
       <div>
         <img src={product.imageUrl}></img>
-        <h1>{product.name}</h1>
-        <h2>{product.description}</h2>
-        <h3>${product.price / 100}</h3>
+        <h1>Name: {product.name}</h1>
+        <h2>Description: {product.description}</h2>
+        <h3>Price: ${product.price / 100}</h3>
         {userId ? (
           <Link to={`/users/${userId}/cart`}>
             <button onClick={this.handleClick}>Add to cart</button>
@@ -40,8 +43,15 @@ class SingleProduct extends React.Component {
             <button onClick={this.handleClickForGuest}>Add to cart</button>
           </Link>
         )}
-      </div>
-    );
+        {/* {product.isAdmin ? ( */}
+          <div>
+            <EditProduct/>
+          </div>
+      {/* ) : (
+        <div></div>
+    )} */}
+    </div>
+    )
   }
 }
 
@@ -51,6 +61,7 @@ const mapStateToProps = (state) => {
     product: state.product,
     itemsInCart: state.itemsInCart,
     itemsInCartForGuest: state.itemsInCartForGuest,
+    isAdmin: state.auth.isAdmin,
   };
 };
 
@@ -59,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     addToCart: (userId, item) => dispatch(addToCart(userId, item)),
     addToGuestCart: (item) => dispatch(addItemToGuestCart(item)),
+    editProduct: (product, id) => dispatch(_editProduct(product, id))
   };
 };
 
