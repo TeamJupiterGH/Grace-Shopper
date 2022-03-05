@@ -39,8 +39,6 @@ const _updateQuantity = (item) => {
 export const addToCart = (userId, item) => {
   return async (dispatch) => {
     try {
-      console.log(userId);
-      console.log("does it get here?-------");
       const { data } = await axios.post(`/api/users/${userId}/cart`, item);
       dispatch(_addToCart(data));
     } catch (error) {
@@ -74,16 +72,13 @@ export const deleteItemInCart = (userId, item) => {
 };
 
 export const updatedQuantity = (userId, item) => {
-  console.log("------UPDATE", item);
-  console.log("------UPDATE", userId);
-  console.log("------UPDATE", item.productId);
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
         `/api/users/${userId}/cart/${item.productId}`,
         item
       );
-      console.log("------DATA", data);
+
       dispatch(_updateQuantity(data));
     } catch (error) {
       console.log(error);
