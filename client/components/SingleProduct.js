@@ -17,7 +17,14 @@ class SingleProduct extends React.Component {
   }
 
   handleClickForGuest() {
-    this.props.addToGuestCart(this.props.product);
+    // this.props.addToGuestCart(this.props.product);
+    // console.log('!!!',this.props.addToGuestCart(this.props.product));
+    const pastry = this.props.product;
+
+    console.log('this is pastry!', pastry);
+    localStorage.setItem(pastry.name, pastry)
+    // console.log(localStorage);
+    
   }
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.id);
