@@ -6,6 +6,9 @@ import SingleItemInCart from "./SingleItemInCart";
 import { fetchCart, deleteItemInCart, updatedQuantity } from "../store/cart";
 class Cart extends React.Component {
   //-------
+  constructor() {
+    super();
+  }
 
   componentDidMount() {
     const userId = this.props.match.params.userId;
@@ -15,6 +18,8 @@ class Cart extends React.Component {
   }
 
   render() {
+    console.log("PROPS INSIDE CART.JS----", this.props);
+
     const arr = JSON.parse(localStorage.getItem("tempCart")) || [];
     let subtotal = 0;
     if (
@@ -29,7 +34,7 @@ class Cart extends React.Component {
 
               return (
                 <div key={item.id}>
-                  <SingleItemInCart item={item} />
+                  <SingleItemInCart item={item} match={this.props.match} />
                 </div>
               );
             })}

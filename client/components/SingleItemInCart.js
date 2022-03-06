@@ -9,9 +9,12 @@ class SingleItemInCart extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
   componentDidUpdate(prevProps) {
-    const item = this.props.item;
+    const { item } = this.props;
     console.log("EVER GET IN HERE?");
+    console.log("PREVPROPS.ITEM.ID?", prevProps.item.id);
+    console.log("THIS PROPS.ITEM.ID?", this.props.item.id);
     if (prevProps.item.id !== this.props.item.id) {
+      console.log("HOW ABOUT HERE?", this.props.itemsInCart.product[item.id]);
       this.setState(
         {
           quantity:
@@ -24,7 +27,7 @@ class SingleItemInCart extends React.Component {
     this.setState({ quantity: Number(event.target.value) });
   }
   render() {
-    const { item, userId } = this.props;
+    const { item, userId, match } = this.props;
     return (
       <div key={item.id}>
         <h1>{item.name}</h1>
@@ -50,9 +53,7 @@ class SingleItemInCart extends React.Component {
         <div>${item.price / 100}/ea</div>
         <button
           type="submit"
-          onClick={() =>
-            this.props.deleteItemInCart(this.props.match.params.userId, item)
-          }
+          onClick={() => this.props.deleteItemInCart(match.params.userId, item)}
         >
           Delete
         </button>

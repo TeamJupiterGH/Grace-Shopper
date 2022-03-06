@@ -8,16 +8,23 @@ class SingleProduct extends React.Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
+    // this.handleUpdate = this.handleUpdate.bind(this);
   }
   handleClick() {
     console.log("add to cart is clicked");
     this.props.addToCart(this.props.user.id, this.props.product);
   }
-
+  // handleUpdate() {
+  //   console.log("does it get here in handleUpdate????");
+  //   this.forceUpdate();
+  //   console.log("how about after forceUpdate");
+  //   console.log("does it rerender??????? ", localStorage);
+  // }
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
   render() {
+    console.log("LOCALSTORAGE IN RENDER", localStorage);
     const product = this.props.product;
     const userId = this.props.user.id;
     const isLoggedIn = this.props.isLoggedIn;
@@ -43,6 +50,8 @@ class SingleProduct extends React.Component {
                   arr.push(product);
                   localStorage.setItem("tempCart", JSON.stringify(arr));
                 }
+                console.log("DOES IT GET HERE???");
+                //    this.handleUpdate();
               }}
             >
               Add to cart
