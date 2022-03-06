@@ -45,8 +45,11 @@ class SingleProduct extends React.Component {
         )}
         {/* {product.isAdmin ? ( */}
           <div>
-            <EditProduct
-            product={product}/>
+            <EditProduct 
+            product={product}
+            // handleChange={this.handleChange}
+            // handleSubmit={this.handleSubmit}/>
+            />
           </div>
       {/* ) : (
         <div></div>
@@ -71,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     addToCart: (userId, item) => dispatch(addToCart(userId, item)),
     addToGuestCart: (item) => dispatch(addItemToGuestCart(item)),
-    editProduct: (product, id) => dispatch(_editProduct(product, id))
+    // editProduct: (product, id) => dispatch(_editProduct(product, id))
   };
 };
 

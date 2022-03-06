@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import  { _editProduct } from '../store/products' 
+import { connect } from 'react-redux';
 
 export class EditProduct extends Component {
   constructor(props) {
       console.log("constructor props", props)
     super(props);
-    this.state = {};
+    this.state = {
+      name: "",
+      description: "",
+      price: 0
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -12,7 +18,15 @@ export class EditProduct extends Component {
     this.state = { ...this.props.product };
   }
 
-  componentDidMount() {}
+  // componentDidMount() {}
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.product.id !== this.props.product.id) {
+      this.setState({
+        name: this.props.product.name || ''
+      });
+    }
+  }
 
   handleChange(evt) {
     this.setState({
@@ -20,9 +34,10 @@ export class EditProduct extends Component {
     });
   }
 
+  
   handleSubmit(evt) {
     evt.preventDefault();
-    //this.props.editProduct({ ...this.state });
+    this.props.editProduct({ ...this.props.product, ...this.state });
   }
 
   render() {
@@ -56,3 +71,17 @@ export class EditProduct extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    product: state.product
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editProduct: (product) => dispatch(_editProduct(product))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);

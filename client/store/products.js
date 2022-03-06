@@ -83,11 +83,11 @@ export const _addProduct = (product) => {
   };
 };
 
-export const _editProduct = (product, id) => {
+export const _editProduct = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
-      const { data } = await axios.put(`/api/products/${id}`, product, {
+      const { data } = await axios.put(`/api/product/${product.id}`, product, {
         headers: {
           authorization: token,
         },
