@@ -10,28 +10,44 @@ import { editProduct } from '../store/products';
 class SingleProduct extends React.Component {
   constructor() {
     super();
-    console.log('constructor props', this.props)
-    
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClickForGuest = this.handleClickForGuest.bind(this);
+  }
+  handleClick() {
+    //console.log("add to cart is clicked");
+    this.props.addToCart(this.props.user.id, this.props.product);
   }
 
+  handleClickForGuest() {
+    this.props.addToGuestCart(this.props.product);
+  }
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
 
   render() {
     const product = this.props.product;
-    console.log('SingleProduct props', this.props)
+    const userId = this.props.user.id;
+    //console.log('SingleProduct props', this.props, product)
     return (
       <div>
         <img src={product.imageUrl}></img>
         <h1>Name: {product.name}</h1>
         <h2>Description: {product.description}</h2>
         <h3>Price: ${product.price / 100}</h3>
-    
+        {userId ? (
+          <Link to={`/users/${userId}/cart`}>
+            <button onClick={this.handleClick}>Add to cart</button>
+          </Link>
+        ) : (
+          <Link to={`/guest/cart`}>
+            <button onClick={this.handleClickForGuest}>Add to cart</button>
+          </Link>
+        )}
         {this.props.isAdmin ? (
           <div>
             <EditProduct
-              history={this.props.history}
+              //history={this.props.history}
               product={product}
               editProduct={this.props.editProduct}
             />
@@ -46,8 +62,11 @@ class SingleProduct extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.auth,
     product: state.product,
     isAdmin: state.auth.isAdmin,
+    itemsInCart: state.itemsInCart,
+    itemsInCartForGuest: state.itemsInCartForGuest
   };
 };
 
@@ -55,6 +74,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     editProduct: (product, id) => dispatch(editProduct(product, id)),
+    addToCart: (userId, item) => dispatch(addToCart(userId, item)),
+    addToGuestCart: (item) => dispatch(addItemToGuestCart(item)),
   };
 };
 

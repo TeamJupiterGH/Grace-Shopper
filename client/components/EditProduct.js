@@ -16,8 +16,6 @@ export class EditProduct extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    //this.state = { ...this.props.product };
   }
 
   handleChange(evt) {
@@ -32,7 +30,7 @@ export class EditProduct extends Component {
   }
 
   render() {
-    console.log("Edit Product props", this.props)
+    //console.log("Edit Product props", this.props)
     const { handleSubmit, handleChange } = this;
     return (
       <div>
