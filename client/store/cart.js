@@ -14,7 +14,7 @@ const _addToCart = (item) => {
   };
 };
 
-const getCart = (items) => {
+export const getCart = (items) => {
   return {
     type: GET_CART,
     items,

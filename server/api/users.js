@@ -81,6 +81,7 @@ router.put("/:userId/checkout", async (req, res, next) => {
   try {
     let order = await Order.findOne({
       where: { userId: userId, complete: false },
+      include: Product,
     });
 
     await order.update(req.body);

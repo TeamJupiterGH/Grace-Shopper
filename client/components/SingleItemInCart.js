@@ -14,22 +14,9 @@ class SingleItemInCart extends React.Component {
     // console.log("PREVPROPS.ITEM.ID?", prevProps.item.id);
     // console.log("THIS PROPS.ITEM.ID?", this.props.item.id);
 
-    // console.log("HOW ABOUT HERE?", this.props.item.id);
-    console.log("HOW ABOUT HERE prev?", prevState);
-    console.log("HOW ABOUT HERE thisState?", this.state.quantity);
-    console.log("ITEM", item); //.products[item.id]);
-    // if (prevProps.item.id !== this.props.item.id) {
-    // if (
-    //   prevProps.item.products[item.id] !== this.props.item.products[item.id]
-    // ) {
-    //   // console.log("HOW ABOUT HERE?", this.props.itemsInCart.product[item.id]);
-    //   this.setState({
-    //     quantity: 3, //item.order_details.quantity || 1,
-    //   });
-    // }
-    if (prevState.quantity !== this.state.quantity) {
+    if (prevProps.item.id !== item.id) {
       console.log("EVER HERE?");
-      this.setState({ quantity: item.order_details.quantity });
+      this.setState({ quantity: item.order_details.quantity || [] });
     }
   }
   handleOnChange(event) {
@@ -54,6 +41,8 @@ class SingleItemInCart extends React.Component {
           <label htmlFor="quantity">Quantity</label>
           <input
             type="number"
+            min={0}
+            step={1}
             name="quantity"
             value={this.state.quantity}
             onChange={this.handleOnChange}
