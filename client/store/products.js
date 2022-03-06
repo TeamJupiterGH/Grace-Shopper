@@ -16,21 +16,21 @@ export const setProducts = (products) => {
   };
 };
 
-export const deleteProduct = (product) => {
+export const _deleteProduct = (product) => {
   return {
     type: DELETE_PRODUCT,
     product,
   };
 };
 
-export const addProduct = (product) => {
+export const _addProduct = (product) => {
   return {
     type: ADD_PRODUCT,
     product,
   };
 };
 
-export const editProduct = (product) => {
+export const _editProduct = (product) => {
   return {
     type: EDIT_PRODUCT,
     product
@@ -49,7 +49,7 @@ export const fetchProducts = () => {
   };
 };
 
-export const _deleteProduct = (id) => {
+export const deleteProduct = (id, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
@@ -58,7 +58,7 @@ export const _deleteProduct = (id) => {
           authorization: token,
         },
       });
-      dispatch(deleteProduct(data));
+      dispatch(_deleteProduct(data));
       history.push('/products');
     } catch (err) {
       console.log(err);
@@ -66,7 +66,7 @@ export const _deleteProduct = (id) => {
   };
 };
 
-export const _addProduct = (product) => {
+export const addProduct = (product, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
@@ -75,7 +75,7 @@ export const _addProduct = (product) => {
           authorization: token,
         },
       });
-      dispatch(addProduct(data));
+      dispatch(_addProduct(data));
       history.push('/products');
     } catch (error) {
       console.log(error);
@@ -83,16 +83,16 @@ export const _addProduct = (product) => {
   };
 };
 
-export const _editProduct = (product) => {
+export const editProduct = (product, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
-      const { data } = await axios.put(`/api/product/${product.id}`, product, {
+      const { data } = await axios.put(`/api/products/${product.id}`, product, {
         headers: {
           authorization: token,
         },
       });
-      dispatch(editProduct(data));
+      dispatch(_editProduct(data));
       history.push('/products');
     } catch (error) {
       console.log(error);

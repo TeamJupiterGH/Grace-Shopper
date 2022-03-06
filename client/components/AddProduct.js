@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { _addProduct, _editProduct } from "../store/products";
+import { addProduct } from "../store/products";
 
 export class AddProduct extends React.Component {
   constructor() {
@@ -65,8 +65,7 @@ const mapState = (state) => {
   
   const mapDispatch = (dispatch) => {
     return {
-    //   editProduct: (product, id) => dispatch(_editProduct(product, id)),
-      addProduct: (product) => dispatch(_addProduct(product)),
+      addProduct: (product) => dispatch(addProduct(product)),
     };
   };
   

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchProducts, _deleteProduct } from '../store/products';
+import { fetchProducts, deleteProduct } from '../store/products';
 import { fetchCart } from '../store/cart';
 import AddProduct from './AddProduct';
 
@@ -15,6 +15,7 @@ export class AllProducts extends React.Component {
 
   render() {
     const { products } = this.props;
+    console.log('AllProducts Props', this.props)
 
     return (
       <div className='grid-container'>
@@ -67,7 +68,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
-    deleteProduct: (id) => dispatch(_deleteProduct(id)),
+    deleteProduct: (id) => dispatch(deleteProduct(id)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
