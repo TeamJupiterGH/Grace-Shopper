@@ -18,32 +18,34 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log("PROPS INSIDE CART.JS----", this.props);
-
     const arr = JSON.parse(localStorage.getItem("tempCart")) || [];
     let subtotal = 0;
-    if (
-      this.props.itemsInCart.products &&
-      this.props.itemsInCart.products.length > 0
-    ) {
-      return (
-        <div>
+    if (this.props.isLoggedIn) {
+      if (
+        this.props.itemsInCart.products &&
+        this.props.itemsInCart.products.length > 0
+      ) {
+        return (
           <div>
-            {this.props.itemsInCart.products.map((item) => {
-              subtotal += item.price * item.order_details.quantity;
+            <div>
+              {this.props.itemsInCart.products.map((item) => {
+                subtotal += item.price * item.order_details.quantity;
 
-              return (
-                <div key={item.id}>
-                  <SingleItemInCart item={item} match={this.props.match} />
-                </div>
-              );
-            })}
+                return (
+                  <div key={item.id}>
+                    <SingleItemInCart item={item} match={this.props.match} />
+                  </div>
+                );
+              })}
 
-            <h3>Subtotal: ${subtotal / 100}</h3>
+              <h3>Subtotal: ${subtotal / 100}</h3>
+            </div>
           </div>
-        </div>
-      );
-    } else {
+        );
+      } else {
+        return null;
+      }
+    } else if (!this.props.isLoggedIn) {
       return (
         <div>
           <div>
