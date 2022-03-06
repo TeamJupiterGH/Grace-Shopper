@@ -5,7 +5,7 @@ import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn, userId, itemsInCart }) => {
   const productArr = itemsInCart.products || [];
-  console.log("LOCAL STORAGE IN NAVE BAR", localStorage);
+
   const numberOfItemsInCart =
     JSON.parse(localStorage.getItem("tempCart")) || [];
   const numberOfItemsInCartLength = numberOfItemsInCart.length;

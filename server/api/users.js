@@ -76,6 +76,20 @@ router.delete("/:userId/cart/:productId", async (req, res, next) => {
   }
 });
 
+router.put("/:userId/checkout", async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    let order = await Order.findOne({
+      where: { userId: userId, complete: false },
+    });
+
+    await order.update(req.body);
+    res.send(order);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put("/:userId/cart/:productId", async (req, res, next) => {
   const userId = req.params.userId;
   const productId = req.params.productId;

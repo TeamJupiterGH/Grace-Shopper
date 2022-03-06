@@ -11,7 +11,7 @@ class SingleProduct extends React.Component {
     // this.handleUpdate = this.handleUpdate.bind(this);
   }
   handleClick() {
-    console.log("add to cart is clicked");
+    //   console.log("add to cart is clicked");
     this.props.addToCart(this.props.user.id, this.props.product);
   }
   // handleUpdate() {
@@ -24,7 +24,7 @@ class SingleProduct extends React.Component {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
   render() {
-    console.log("LOCALSTORAGE IN RENDER", localStorage);
+    //   console.log("LOCALSTORAGE IN RENDER", localStorage);
     const product = this.props.product;
     const userId = this.props.user.id;
     const isLoggedIn = this.props.isLoggedIn;
@@ -50,7 +50,7 @@ class SingleProduct extends React.Component {
                   arr.push(product);
                   localStorage.setItem("tempCart", JSON.stringify(arr));
                 }
-                console.log("DOES IT GET HERE???");
+                //      console.log("DOES IT GET HERE???");
                 //    this.handleUpdate();
               }}
             >

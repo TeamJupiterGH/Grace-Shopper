@@ -9,7 +9,12 @@ class Cart extends React.Component {
   constructor() {
     super();
   }
-
+  handleDeleteClick(item) {
+    let tempCart = JSON.parse(localStorage.getItem("tempCart"));
+    let itemId = item.id;
+    let updatedCart = tempCart.filter((product) => product.id !== itemId);
+    localStorage.setItem("tempCart", JSON.stringify(updatedCart));
+  }
   componentDidMount() {
     const userId = this.props.match.params.userId;
     if (userId) {
@@ -39,6 +44,9 @@ class Cart extends React.Component {
               })}
 
               <h3>Subtotal: ${subtotal / 100}</h3>
+              <Link to={`/users/${this.props.user.id}/checkout`}>
+                <button>Check Out</button>
+              </Link>
             </div>
           </div>
         );
@@ -57,7 +65,9 @@ class Cart extends React.Component {
                   <img src={item.imageUrl} />
                   <div>${item.price / 100}</div>
                   {/* need to set up delete button to be functional */}
-                  <button>Delete</button>
+                  <button onClick={() => this.handleDeleteClick(item)}>
+                    Delete
+                  </button>
                 </div>
               );
             })}

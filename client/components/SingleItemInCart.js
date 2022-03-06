@@ -8,19 +8,28 @@ class SingleItemInCart extends React.Component {
     this.state = { quantity: 1 };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
-  componentDidUpdate(prevProps) {
-    const { item } = this.props;
-    console.log("EVER GET IN HERE?");
-    console.log("PREVPROPS.ITEM.ID?", prevProps.item.id);
-    console.log("THIS PROPS.ITEM.ID?", this.props.item.id);
-    if (prevProps.item.id !== this.props.item.id) {
-      console.log("HOW ABOUT HERE?", this.props.itemsInCart.product[item.id]);
-      this.setState(
-        {
-          quantity:
-            this.props.itemsInCart.products[item.id].order_details.quantity,
-        } || 1
-      );
+  componentDidUpdate(prevProps, prevState) {
+    const item = this.props.item;
+    // console.log("EVER GET IN HERE?");
+    // console.log("PREVPROPS.ITEM.ID?", prevProps.item.id);
+    // console.log("THIS PROPS.ITEM.ID?", this.props.item.id);
+
+    // console.log("HOW ABOUT HERE?", this.props.item.id);
+    console.log("HOW ABOUT HERE prev?", prevState);
+    console.log("HOW ABOUT HERE thisState?", this.state.quantity);
+    console.log("ITEM", item); //.products[item.id]);
+    // if (prevProps.item.id !== this.props.item.id) {
+    // if (
+    //   prevProps.item.products[item.id] !== this.props.item.products[item.id]
+    // ) {
+    //   // console.log("HOW ABOUT HERE?", this.props.itemsInCart.product[item.id]);
+    //   this.setState({
+    //     quantity: 3, //item.order_details.quantity || 1,
+    //   });
+    // }
+    if (prevState.quantity !== this.state.quantity) {
+      console.log("EVER HERE?");
+      this.setState({ quantity: item.order_details.quantity });
     }
   }
   handleOnChange(event) {
