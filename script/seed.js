@@ -120,6 +120,9 @@ async function seed() {
 
   const order1 = await Order.create({ complete: true });
   const order2 = await Order.create({});
+  const order3 = await Order.create({});
+  const order4 = await Order.create({});
+  const order5 = await Order.create({})
 
   await user1.addOrder([order1, order2]);
 
