@@ -14,12 +14,7 @@ class Cart extends React.Component {
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
-  // handleDeleteClick(item) {
-  //   let tempCart = JSON.parse(localStorage.getItem("tempCart"));
-  //   let itemId = item.id;
-  //   let updatedCart = tempCart.filter((product) => product.id !== itemId);
-  //   localStorage.setItem("tempCart", JSON.stringify(updatedCart));
-  // }
+ 
   handleDeleteClick(item) {
     let tempCart = JSON.parse(localStorage.getItem("tempCart"));
     let itemId = item.id;
@@ -77,29 +72,6 @@ class Cart extends React.Component {
       } else {
         return null;
       }
-      //  } else if (!this.props.isLoggedIn) {
-      // return (
-      //   <div>
-      //     <div>
-      //       {arr.map((item, idx) => {
-      //         subtotal += item.price;
-      //         return (
-      //           <div key={idx}>
-      //             <h1>{item.name}</h1>
-      //             <img src={item.imageUrl} />
-      //             <div>${item.price / 100}</div>
-      //             {/* need to set up delete button to be functional */}
-      //             <button onClick={() => this.handleDeleteClick(item)}>
-      //               Delete
-      //             </button>
-      //           </div>
-      //         );
-      //       })}
-      //     </div>
-      //     <br />
-      //     <h3>Subtotal: ${subtotal / 100}</h3>
-      //   </div>
-      // );
     } else if (!this.props.isLoggedIn) {
       return (
         <div>

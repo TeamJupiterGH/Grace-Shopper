@@ -5,15 +5,27 @@ import { fetchProducts, _deleteProduct } from "../store/products";
 import { fetchCart } from "../store/cart";
 
 export class AllProducts extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
+
   componentDidMount() {
     this.props.getProducts();
+
+    console.log('this is props!!', this.props);
+   
     if (this.props.isLoggedIn) {
+      console.log('got to isLoggedIn!!');
+      // this.props.fetchCart(1);
       this.props.fetchCart(this.props.user.id);
     }
   }
 
   render() {
     const { products } = this.props;
+
+    console.log('this is props inside render', this.props);
     
     return (
       <div className="grid-container">

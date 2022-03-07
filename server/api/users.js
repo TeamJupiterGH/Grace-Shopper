@@ -34,6 +34,14 @@ router.get("/:userId/cart", requireToken, async (req, res, next) => {
   }
 });
 
+// router.get("/:userId/products", requireToken, async(req, res, next) => {
+//   const userId = req.params.userId;
+
+//   try{
+//     const 
+//   }
+// })
+
 router.post("/:userId/cart", requireToken, async (req, res, next) => {
   const userId = req.params.userId;
   try {

@@ -5,20 +5,27 @@ import { fetchCart, deleteItemInCart, updatedQuantity } from "../store/cart";
 class SingleItemInCart extends React.Component {
   constructor() {
     super();
-    this.state = { quantity: 1 };
+    this.state = { quantity: 10 };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
-  componentDidUpdate(prevProps, prevState) {
-    const item = this.props.item;
-    // console.log("EVER GET IN HERE?");
-    // console.log("PREVPROPS.ITEM.ID?", prevProps.item.id);
-    // console.log("THIS PROPS.ITEM.ID?", this.props.item.id);
-
-    if (prevProps.item.id !== item.id) {
-      console.log("EVER HERE?");
-      this.setState({ quantity: item.order_details.quantity || [] });
-    }
+  componentDidMount() {
+    console.log('single cart item');
+    this.setState({quantity: this.props.item.order_details.quantity})
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   const item = this.props.item;
+  //   console.log("EVER GET IN HERE?");
+  //   // console.log('this is props-->>>', this.props);
+  //   // console.log('this is item', item);
+  //   // console.log("PREVPROPS.ITEM.ID?", prevProps.item.id);
+  //   // console.log("THIS PROPS.ITEM.ID?", this.props.item.id);
+
+  //   if (prevProps.item.id !== item.id) {
+  //     console.log("EVER HERE?");
+  //     this.setState({ quantity: item.order_details.quantity || [] });
+  //   }
+  // }
   handleOnChange(event) {
     this.setState({ quantity: Number(event.target.value) });
   }
