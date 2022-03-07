@@ -39,18 +39,44 @@ class SingleProduct extends React.Component {
             <button onClick={this.handleClick}>Add to cart</button>
           </Link>
         ) : (
+          // <Link to={`/guest/cart`}>
+          //   <button
+          //     onClick={() => {
+          //       if (!localStorage.tempCart) {
+          //         localStorage.setItem("tempCart", JSON.stringify([product]));
+          //       } else {
+          //         const arr = JSON.parse(localStorage.getItem("tempCart"));
+          //         arr.push(product);
+          //         localStorage.setItem("tempCart", JSON.stringify(arr));
+          //       }
+          //       //      console.log("DOES IT GET HERE???");
+          //       //    this.handleUpdate();
+          //     }}
+          //   >
+          //     Add to cart
+          //   </button>
+          // </Link>
           <Link to={`/guest/cart`}>
             <button
               onClick={() => {
+                // *EB
+                product.quantity = 1;
+                //
                 if (!localStorage.tempCart) {
                   localStorage.setItem("tempCart", JSON.stringify([product]));
                 } else {
                   const arr = JSON.parse(localStorage.getItem("tempCart"));
-                  arr.push(product);
+                  const ids = arr.map((obj) => {
+                    return obj.id;
+                  });
+                  if (ids.indexOf(product.id) === -1) {
+                    arr.push(product);
+                  } else {
+                    console.log("got to else!");
+                    product.quantity++;
+                  }
                   localStorage.setItem("tempCart", JSON.stringify(arr));
                 }
-                //      console.log("DOES IT GET HERE???");
-                //    this.handleUpdate();
               }}
             >
               Add to cart

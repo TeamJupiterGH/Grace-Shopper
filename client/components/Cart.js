@@ -8,12 +8,28 @@ class Cart extends React.Component {
   //-------
   constructor() {
     super();
+    this.state = {
+      quantity: 1,
+      cart: "",
+    };
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
+  // handleDeleteClick(item) {
+  //   let tempCart = JSON.parse(localStorage.getItem("tempCart"));
+  //   let itemId = item.id;
+  //   let updatedCart = tempCart.filter((product) => product.id !== itemId);
+  //   localStorage.setItem("tempCart", JSON.stringify(updatedCart));
+  // }
   handleDeleteClick(item) {
     let tempCart = JSON.parse(localStorage.getItem("tempCart"));
     let itemId = item.id;
     let updatedCart = tempCart.filter((product) => product.id !== itemId);
     localStorage.setItem("tempCart", JSON.stringify(updatedCart));
+    this.setState({ cart: updatedCart });
+  }
+  handleOnChange(event) {
+    event.preventDefault();
+    this.setState({ quantity: Number(event.target.value) });
   }
   componentDidMount() {
     console.log(
@@ -61,18 +77,72 @@ class Cart extends React.Component {
       } else {
         return null;
       }
+      //  } else if (!this.props.isLoggedIn) {
+      // return (
+      //   <div>
+      //     <div>
+      //       {arr.map((item, idx) => {
+      //         subtotal += item.price;
+      //         return (
+      //           <div key={idx}>
+      //             <h1>{item.name}</h1>
+      //             <img src={item.imageUrl} />
+      //             <div>${item.price / 100}</div>
+      //             {/* need to set up delete button to be functional */}
+      //             <button onClick={() => this.handleDeleteClick(item)}>
+      //               Delete
+      //             </button>
+      //           </div>
+      //         );
+      //       })}
+      //     </div>
+      //     <br />
+      //     <h3>Subtotal: ${subtotal / 100}</h3>
+      //   </div>
+      // );
     } else if (!this.props.isLoggedIn) {
       return (
         <div>
           <div>
             {arr.map((item, idx) => {
-              subtotal += item.price;
+              subtotal += item.price * item.quantity;
               return (
                 <div key={idx}>
                   <h1>{item.name}</h1>
                   <img src={item.imageUrl} />
-                  <div>${item.price / 100}</div>
-                  {/* need to set up delete button to be functional */}
+                  <form
+                    onChange={(event) => {
+                      event.preventDefault();
+                      let updatedQTY = event.target.value;
+                      let itemId = item.id;
+                      let existingCart = JSON.parse(
+                        localStorage.getItem("tempCart")
+                      );
+                      let updatedCart = existingCart.map((product) => {
+                        if (product.id === itemId) {
+                          return { ...product, quantity: updatedQTY };
+                        } else {
+                          return product;
+                        }
+                      });
+                      localStorage.setItem(
+                        "tempCart",
+                        JSON.stringify(updatedCart)
+                      );
+                      this.handleOnChange(event);
+                    }}
+                  >
+                    <label htmlFor="quantity">Quantity</label>
+                    <input
+                      type="number"
+                      min={0}
+                      step={1}
+                      name="quantity"
+                      value={item.quantity}
+                      onChange={this.handleOnChange}
+                    />
+                  </form>
+                  <div>${item.price / 100}/ea</div>
                   <button onClick={() => this.handleDeleteClick(item)}>
                     Delete
                   </button>
@@ -87,6 +157,7 @@ class Cart extends React.Component {
     }
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
