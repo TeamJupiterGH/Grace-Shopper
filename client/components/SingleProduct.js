@@ -1,12 +1,11 @@
-
-import React from 'react';
-import { connect } from 'react-redux';
-import { fetchSingleProduct } from '../store/singleProduct';
-import { Link } from 'react-router-dom';
-import { addToCart } from '../store/cart';
-import { addItemToGuestCart } from '../store/cartForGuest';
-import { EditProduct } from './EditProduct';
-import { editProduct } from '../store/singleProduct';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchSingleProduct } from "../store/singleProduct";
+import { Link } from "react-router-dom";
+import { addToCart } from "../store/cart";
+//import { addItemToGuestCart } from "../store/cartForGuest";
+import { EditProduct } from "./EditProduct";
+import { editProduct } from "../store/singleProduct";
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -15,7 +14,6 @@ class SingleProduct extends React.Component {
     // this.handleUpdate = this.handleUpdate.bind(this);
   }
   handleClick() {
-
     //console.log("add to cart is clicked");
 
     //   console.log("add to cart is clicked");
@@ -35,17 +33,15 @@ class SingleProduct extends React.Component {
   render() {
     const product = this.props.product;
     const userId = this.props.user.id;
-
-    //console.log('SingleProduct props', this.props, product)
-    return (
-      <div>
-        <img src={product.imageUrl}></img>
-        <h1>Name: {product.name}</h1>
-        <h2>Description: {product.description}</h2>
-        <h3>Price: ${product.price / 100}</h3>
-        {userId ? (
-
     const isLoggedIn = this.props.isLoggedIn;
+    //console.log('SingleProduct props', this.props, product)
+    // return (
+    //   <div>
+    //     <img src={product.imageUrl}></img>
+    //     <h1>Name: {product.name}</h1>
+    //     <h2>Description: {product.description}</h2>
+    //     <h3>Price: ${product.price / 100}</h3>
+    //
 
     return (
       <div>
@@ -54,12 +50,10 @@ class SingleProduct extends React.Component {
         <h2>{product.description}</h2>
         <h3>${product.price / 100}</h3>
         {isLoggedIn ? (
-
           <Link to={`/users/${userId}/cart`}>
             <button onClick={this.handleClick}>Add to cart</button>
           </Link>
         ) : (
-          
           <Link to={`/guest/cart`}>
             <button
               onClick={() => {
@@ -111,7 +105,7 @@ const mapStateToProps = (state) => {
     product: state.product,
     isAdmin: state.auth.isAdmin,
     itemsInCart: state.itemsInCart,
-    itemsInCartForGuest: state.itemsInCartForGuest
+    itemsInCartForGuest: state.itemsInCartForGuest,
   };
 };
 
