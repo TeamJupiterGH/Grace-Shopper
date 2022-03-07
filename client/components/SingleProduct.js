@@ -31,10 +31,10 @@ class SingleProduct extends React.Component {
     //console.log('SingleProduct props', this.props, product)
     return (
       <div>
-        <img src={product.imageUrl}></img>
-        <h1>Name: {product.name}</h1>
-        <h2>Description: {product.description}</h2>
-        <h3>Price: ${product.price / 100}</h3>
+        <img src={product.imageUrl} className="single-product-image"></img>
+        <h1>{product.name}</h1>
+        <h2>{product.description}</h2>
+        <h3>${product.price / 100}</h3>
         {userId ? (
           <Link to={`/users/${userId}/cart`}>
             <button onClick={this.handleClick}>Add to cart</button>
