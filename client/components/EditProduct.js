@@ -9,9 +9,10 @@ export class EditProduct extends Component {
     super(props);
     //console.log('PROPS!', this.props)
     this.state = {
-      // name: "",
-      // description: "",
-      // price: 0
+      name: "",
+      description: "",
+      price: 0,
+      imageUrl: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,34 +33,35 @@ export class EditProduct extends Component {
   render() {
     //console.log("Edit Product props", this.props)
     const { handleSubmit, handleChange } = this;
+    const { name, description, price, imageUrl } = this.state;
     return (
       <div>
         <h2>Edit product here:</h2>
         <form id='edit-product-form' onSubmit={handleSubmit}>
           <label htmlFor='name'>Name:</label>
        
-          <input name='name' onChange={handleChange} value={this.state.name} />
+          <input name='name' onChange={handleChange} value={name} />
           
           <label htmlFor='description'>Description:</label>
        
           <input
             name='description'
             onChange={handleChange}
-            value={this.state.description}
+            value={description}
           />
           <label htmlFor='price'>Price:</label>
        
           <input
             name='price'
             onChange={handleChange}
-            value={this.state.price}
+            value={price}
           />
 
           <label htmlFor='imageUrl'>Image:</label>
           <input
           name='imageUrl'
           onChange={handleChange}
-          value={this.state.imageUrl}
+          value={imageUrl}
           />
 
           &nbsp;&nbsp; <button type='submit'>Submit</button>

@@ -10,6 +10,7 @@ export class AddProduct extends React.Component {
       name: "",
       description: "",
       price: 0,
+      imageUrl: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +24,7 @@ export class AddProduct extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addProduct({ ...this.state });
-    this.setState({ name: "", description: "", price: 0})
+    this.setState({ name: "", description: "", price: 0, imageUrl: ""})
   }
 
 
