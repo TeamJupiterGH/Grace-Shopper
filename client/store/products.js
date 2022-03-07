@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-
-const TOKEN = 'token'
+const TOKEN = 'token';
 
 //ACTION TYPE
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
+const ADD_PRODUCT = 'ADD_PRODUCT';
+
 
 //ACTION CREATOR
 export const setProducts = (products) => {
@@ -15,9 +16,16 @@ export const setProducts = (products) => {
   };
 };
 
-export const deleteProduct = (product) => {
+export const _deleteProduct = (product) => {
   return {
     type: DELETE_PRODUCT,
+    product,
+  };
+};
+
+export const _addProduct = (product) => {
+  return {
+    type: ADD_PRODUCT,
     product,
   };
 };
@@ -34,21 +42,36 @@ export const fetchProducts = () => {
   };
 };
 
-export const _deleteProduct = (id) => {
+export const deleteProduct = (id, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
-      const { data } = await axios.delete(`/api/products/${id}`, 
-      {
+      const { data } = await axios.delete(`/api/products/${id}`, {
         headers: {
-          authorization: token
-        }
-      }
-      );
-      dispatch(deleteProduct(data));
-      history.push('/products')
+          authorization: token,
+        },
+      });
+      dispatch(_deleteProduct(data));
+      history.push('/products');
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const addProduct = (product, history) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    try {
+      const { data } = await axios.post('/api/products', product, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(_addProduct(data));
+      history.push('/products');
+    } catch (error) {
+      console.log(error);
     }
   };
 };
@@ -61,9 +84,12 @@ export default function productsReducer(state = initialState, action) {
     case SET_PRODUCTS:
       return action.products;
     case DELETE_PRODUCT:
-      return [...state].filter((item) => 
-        item.id !== action.product.id
-      );
+      return [...state].filter((item) => item.id !== action.product.id);
+    case ADD_PRODUCT:
+      return [...state, action.product]
+    // case EDIT_PRODUCT:
+    //   console.log('reducer--->',state.map((product) => product.id === action.product.id ? action.product:product))
+    //   return state.map((product) => product.id === action.product.id ? action.product:product)
     default:
       return state;
   }

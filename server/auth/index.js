@@ -34,20 +34,5 @@ router.get("/me", async (req, res, next) => {
   }
 });
 
-router.get("/new", async (req, res, next) => {
-  try {
-    res.send("hi");
-  } catch (ex) {
-    next(ex);
-  }
-});
 
-// router.delete('/:id', requireToken, isAdmin, async (req, res, next) => {
-//   try {
-//     const productToBeDeleted = await Product.findByPk(req.params.id);
-//     await productToBeDeleted.destroy();
-//     res.send(productToBeDeleted);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+

@@ -1,8 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchProducts, _deleteProduct } from "../store/products";
-import { fetchCart } from "../store/cart";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { fetchProducts, deleteProduct } from '../store/products';
+import { fetchCart } from '../store/cart';
+import AddProduct from './AddProduct';
 
 export class AllProducts extends React.Component {
 
@@ -25,14 +26,17 @@ export class AllProducts extends React.Component {
   render() {
     const { products } = this.props;
 
+    //console.log('AllProducts Props', this.props)
+
+
     console.log('this is props inside render', this.props);
-    
+
     return (
-      <div className="grid-container">
+      <div className='grid-container'>
         {products.map(({ id, name, price, description, imageUrl }) => (
-          <div key={id} className="grid-item">
+          <div key={id} className='grid-item'>
             <Link to={`/products/${id}`}>
-              <div className="link">
+              <div className='link'>
                 <h2>Name: {name}</h2>
                 <h2>Price: ${price / 100}</h2>
                 <h2>Description: {description}</h2>
@@ -40,7 +44,6 @@ export class AllProducts extends React.Component {
               </div>
             </Link>
             {this.props.isAdmin ? (
-
               <button
                 onClick={() => {
                   this.props.deleteProduct(id);
@@ -53,6 +56,15 @@ export class AllProducts extends React.Component {
             )}
           </div>
         ))}
+        {this.props.isAdmin ? (
+          <div>
+            <div className='grid-item-add-product'>
+            <AddProduct />
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     );
   }
@@ -70,7 +82,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
-    deleteProduct: (id) => dispatch(_deleteProduct(id)),
+    deleteProduct: (id) => dispatch(deleteProduct(id)),
     fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
