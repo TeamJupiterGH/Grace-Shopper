@@ -29,7 +29,7 @@ export class AddProduct extends React.Component {
 
   render() {
     const { handleSubmit, handleChange } = this;
-    const { name, description, price } = this.state;
+    const { name, description, price, imageUrl } = this.state;
   
     return (
       <div>
@@ -37,14 +37,21 @@ export class AddProduct extends React.Component {
         </div>
 
       <form id="add-product-form" onSubmit={handleSubmit}>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Name*</label>
         <input name="name" onChange={handleChange} value={name} />
 
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Description*</label>
         <input name="description" onChange={handleChange} value={description} />
 
-        <label htmlFor="price">Price</label>
+        <label htmlFor="price">Price*</label>
         <input name="price" onChange={handleChange} value={price} />
+
+        <label htmlFor='imageUrl'>Image*:</label>
+          <input
+          name='imageUrl'
+          onChange={handleChange}
+          value={imageUrl}
+          />
         
         &nbsp;&nbsp; <button type="submit">Submit</button>
         {/* <Link to="/">Cancel</Link> */}

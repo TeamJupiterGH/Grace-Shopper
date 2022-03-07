@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { addToCart } from '../store/cart';
 import { addItemToGuestCart } from '../store/cartForGuest';
 import { EditProduct } from './EditProduct';
-import { editProduct } from '../store/products';
+import { editProduct } from '../store/singleProduct';
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -48,6 +48,7 @@ class SingleProduct extends React.Component {
           <div>
             <EditProduct
               //history={this.props.history}
+              match={this.props.match}
               product={product}
               editProduct={this.props.editProduct}
             />

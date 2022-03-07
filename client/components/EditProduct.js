@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  { editProduct } from '../store/products';
+import  { editProduct } from '../store/singleProduct';
 import { fetchSingleProduct } from '../store/singleProduct';
 import { connect } from 'react-redux';
 
@@ -9,9 +9,9 @@ export class EditProduct extends Component {
     super(props);
     //console.log('PROPS!', this.props)
     this.state = {
-      name: "",
-      description: "",
-      price: 0
+      // name: "",
+      // description: "",
+      // price: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,25 +37,34 @@ export class EditProduct extends Component {
         <h2>Edit product here:</h2>
         <form id='edit-product-form' onSubmit={handleSubmit}>
           <label htmlFor='name'>Name:</label>
-          &nbsp;
-          <input name='name' onChange={handleChange} value={this.state.name ?? ""} />
-          &nbsp;&nbsp;
+       
+          <input name='name' onChange={handleChange} value={this.state.name} />
+          
           <label htmlFor='description'>Description:</label>
-          &nbsp;
+       
           <input
             name='description'
             onChange={handleChange}
-            value={this.state.description ?? ""}
+            value={this.state.description}
           />
           <label htmlFor='price'>Price:</label>
-          &nbsp;
+       
           <input
             name='price'
             onChange={handleChange}
-            value={this.state.price ?? 0}
+            value={this.state.price}
           />
+
+          <label htmlFor='imageUrl'>Image:</label>
+          <input
+          name='imageUrl'
+          onChange={handleChange}
+          value={this.state.imageUrl}
+          />
+
           &nbsp;&nbsp; <button type='submit'>Submit</button>
         </form>
+
       </div>
     );
   }
@@ -67,9 +76,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, {history}) => {
   return {
-    editProduct: (product) => dispatch(editProduct(product)),
+    editProduct: (product) => dispatch(editProduct(product, history)),
   };
 };
 

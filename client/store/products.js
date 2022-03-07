@@ -6,7 +6,7 @@ const TOKEN = 'token';
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const ADD_PRODUCT = 'ADD_PRODUCT';
-const EDIT_PRODUCT = 'EDIT_PRODUCT'
+
 
 //ACTION CREATOR
 export const setProducts = (products) => {
@@ -29,13 +29,6 @@ export const _addProduct = (product) => {
     product,
   };
 };
-
-export const _editProduct = (product) => {
-  return {
-    type: EDIT_PRODUCT,
-    product
-  }
-}
 
 //THUNK
 export const fetchProducts = () => {
@@ -83,23 +76,6 @@ export const addProduct = (product, history) => {
   };
 };
 
-export const editProduct = (product) => {
-  return async (dispatch) => {
-    const token = window.localStorage.getItem(TOKEN);
-    try {
-      const { data } = await axios.put(`/api/products/${product.id}`, product, {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(_editProduct(data));
-      //history.push('/products');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 //REDUCER
 const initialState = [];
 
@@ -111,8 +87,9 @@ export default function productsReducer(state = initialState, action) {
       return [...state].filter((item) => item.id !== action.product.id);
     case ADD_PRODUCT:
       return [...state, action.product]
-    case EDIT_PRODUCT:
-      return state.map((product) => product.id === action.product.id ? action.product:product)
+    // case EDIT_PRODUCT:
+    //   console.log('reducer--->',state.map((product) => product.id === action.product.id ? action.product:product))
+    //   return state.map((product) => product.id === action.product.id ? action.product:product)
     default:
       return state;
   }
