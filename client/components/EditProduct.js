@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editProduct: (product) => dispatch(editProduct(product, history)),
+    editProduct: (product) => dispatch(editProduct(product)),
   };
 };
 

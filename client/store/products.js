@@ -83,7 +83,7 @@ export const addProduct = (product, history) => {
   };
 };
 
-export const editProduct = (product, history) => {
+export const editProduct = (product) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
     try {
@@ -93,7 +93,7 @@ export const editProduct = (product, history) => {
         },
       });
       dispatch(_editProduct(data));
-      history.push('/products');
+      //history.push('/products');
     } catch (error) {
       console.log(error);
     }
