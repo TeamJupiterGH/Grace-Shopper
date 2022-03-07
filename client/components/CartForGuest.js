@@ -1,36 +1,26 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+// import React, { useState } from "react";
+// import { connect } from "react-redux";
 
-class CartForGuest extends React.Component {
-  constructor() {
-    super();
-  }
+// class CartForGuest extends React.Component {
+//   render() {
+//     const arr = JSON.parse(localStorage.getItem("tempCart")) || [];
 
-  render() {
-    console.log("does it get to cart?????????", this.subTotal);
-    if (this.props.itemInCart.length > 0) {
-      return (
-        <div>
-          {this.props.itemInCart.map((item) => (
-            <div key={item.id}>
-              <h1>{item.name}</h1>
-              <img src={item.imageUrl} />
-              <div>{item.price / 100}</div>
-            </div>
-          ))}
+//     return (
+//       <div>
+//         <div>
+//           {arr.map((item, idx) => (
+//             <div key={idx}>
+//               <h1>{item.name}</h1>
+//               <img src={item.imageUrl} />
+//               <div>${item.price / 100}</div>
+//             </div>
+//           ))}
+//         </div>
 
-          <div>Subtotal: $</div>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-}
+//         <div>Subtotal: $</div>
+//       </div>
+//     );
+//   }
+// }
 
-const mapState = (state) => {
-  return {
-    itemInCart: state.itemsInCartForGuest,
-  };
-};
-export default connect(mapState)(CartForGuest);
+// export default CartForGuest;
