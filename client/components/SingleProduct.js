@@ -24,7 +24,6 @@ class SingleProduct extends React.Component {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
   render() {
-    //   console.log("LOCALSTORAGE IN RENDER", localStorage);
     const product = this.props.product;
     const userId = this.props.user.id;
     const isLoggedIn = this.props.isLoggedIn;
