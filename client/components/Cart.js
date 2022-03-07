@@ -16,6 +16,10 @@ class Cart extends React.Component {
     localStorage.setItem("tempCart", JSON.stringify(updatedCart));
   }
   componentDidMount() {
+    console.log(
+      "ITEMS IN CART IN CART.JS DIDMOUNT",
+      this.props.itemsInCart.products
+    );
     const userId = this.props.match.params.userId;
     if (userId) {
       this.props.fetchCart(userId);
@@ -23,6 +27,10 @@ class Cart extends React.Component {
   }
 
   render() {
+    console.log(
+      "ITEMS IN CART IN CART.JS RENDER",
+      this.props.itemsInCart.products
+    );
     const arr = JSON.parse(localStorage.getItem("tempCart")) || [];
     let subtotal = 0;
     if (this.props.isLoggedIn) {

@@ -55,6 +55,7 @@ class SingleItemInCart extends React.Component {
         >
           Delete
         </button>
+        <hr />
       </div>
     );
   }

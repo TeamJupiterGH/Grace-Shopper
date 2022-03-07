@@ -5,6 +5,8 @@ const ADD_TO_CART = "ADD_TO_CART";
 const GET_CART = "GET_CART";
 const DELETE_ITEM_IN_CART = "DELETE_ITEM_IN_CART";
 const UPDATE_QUANTITY = "UPDATE_QUANTITY";
+const TOKEN = "token";
+const token = window.localStorage.getItem(TOKEN);
 
 //ACTION CREATOR---------------
 const _addToCart = (item) => {
@@ -39,7 +41,12 @@ const _updateQuantity = (item) => {
 export const addToCart = (userId, item) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/users/${userId}/cart`, item);
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.post(`/api/users/${userId}/cart`, item, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch(_addToCart(data));
     } catch (error) {
       console.log(error);
@@ -50,7 +57,12 @@ export const addToCart = (userId, item) => {
 export const fetchCart = (userId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/users/${userId}/cart`);
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.get(`/api/users/${userId}/cart`, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch(getCart(data));
     } catch (error) {
       console.log(error);
@@ -61,8 +73,14 @@ export const fetchCart = (userId) => {
 export const deleteItemInCart = (userId, item) => {
   return async (dispatch) => {
     try {
+      const token = window.localStorage.getItem(TOKEN);
       const { data } = await axios.delete(
-        `/api/users/${userId}/cart/${item.id}`
+        `/api/users/${userId}/cart/${item.id}`,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
       );
       dispatch(_deleteItemInCart(data));
     } catch (error) {
@@ -74,9 +92,11 @@ export const deleteItemInCart = (userId, item) => {
 export const updatedQuantity = (userId, item) => {
   return async (dispatch) => {
     try {
+      const token = window.localStorage.getItem(TOKEN);
       const { data } = await axios.put(
         `/api/users/${userId}/cart/${item.productId}`,
-        item
+        item,
+        { headers: { authorization: token } }
       );
 
       dispatch(_updateQuantity(data));

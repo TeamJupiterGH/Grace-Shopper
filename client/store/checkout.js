@@ -2,6 +2,10 @@ import axios from "axios";
 
 //action type
 const CHECKOUT = "CHECKOUT";
+const TOKEN = "token";
+//const token = window.localStorage.getItem(TOKEN);
+
+//console.log("token------", token);
 
 //action creator
 const _checkout = (item) => {
@@ -12,7 +16,12 @@ const _checkout = (item) => {
 export const checkout = (userId, item) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/users/${userId}/checkout`, item);
+      const token = localStorage.token;
+      const { data } = await axios.put(`/api/users/${userId}/checkout`, item, {
+        headers: {
+          authorization: token,
+        },
+      });
       console.log("DATA IN CHECKOUT", item);
       dispatch(_checkout(data));
     } catch (error) {

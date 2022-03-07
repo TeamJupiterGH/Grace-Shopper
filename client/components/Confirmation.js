@@ -16,10 +16,12 @@ class Confirmation extends React.Component {
             subtotal += product.price * product.order_details.quantity;
             return (
               <div key={product.id}>
+                <br />
                 <img src={product.imageUrl} />
                 <div>Name: {product.name}</div>
                 <div>Quantity: {product.order_details.quantity}</div>
                 <br />
+                <hr />
               </div>
             );
           })}

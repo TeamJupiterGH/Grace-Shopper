@@ -1,9 +1,11 @@
 const router = require("express").Router();
+const { requireToken } = require("../api/authentication");
 const {
   models: { User, Order, Order_Details, Product },
 } = require("../db");
 module.exports = router;
 
+//DO WE NEED REQUIRETOKEN HERE????
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -18,7 +20,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:userId/cart", async (req, res, next) => {
+router.get("/:userId/cart", requireToken, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     const order = await Order.findOne({
@@ -32,7 +34,7 @@ router.get("/:userId/cart", async (req, res, next) => {
   }
 });
 
-router.post("/:userId/cart", async (req, res, next) => {
+router.post("/:userId/cart", requireToken, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     let order = await Order.findOne({
@@ -57,26 +59,30 @@ router.post("/:userId/cart", async (req, res, next) => {
   }
 });
 
-router.delete("/:userId/cart/:productId", async (req, res, next) => {
-  const userId = req.params.userId;
-  const productId = req.params.productId;
-  try {
-    let order = await Order.findOne({
-      where: { userId: userId, complete: false },
-    });
+router.delete(
+  "/:userId/cart/:productId",
+  requireToken,
+  async (req, res, next) => {
+    const userId = req.params.userId;
+    const productId = req.params.productId;
+    try {
+      let order = await Order.findOne({
+        where: { userId: userId, complete: false },
+      });
 
-    let productToBeDeleted = await Order_Details.findOne({
-      where: { productId: productId, orderId: order.id },
-    });
+      let productToBeDeleted = await Order_Details.findOne({
+        where: { productId: productId, orderId: order.id },
+      });
 
-    await productToBeDeleted.destroy();
-    res.send(productToBeDeleted);
-  } catch (error) {
-    next(error);
+      await productToBeDeleted.destroy();
+      res.send(productToBeDeleted);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
-router.put("/:userId/checkout", async (req, res, next) => {
+router.put("/:userId/checkout", requireToken, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     let order = await Order.findOne({
@@ -91,7 +97,7 @@ router.put("/:userId/checkout", async (req, res, next) => {
   }
 });
 
-router.put("/:userId/cart/:productId", async (req, res, next) => {
+router.put("/:userId/cart/:productId", requireToken, async (req, res, next) => {
   const userId = req.params.userId;
   const productId = req.params.productId;
   try {
