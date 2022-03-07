@@ -20,12 +20,7 @@ class SingleProduct extends React.Component {
 
     this.props.addToCart(this.props.user.id, this.props.product);
   }
-  // handleUpdate() {
-  //   console.log("does it get here in handleUpdate????");
-  //   this.forceUpdate();
-  //   console.log("how about after forceUpdate");
-  //   console.log("does it rerender??????? ", localStorage);
-  // }
+  
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.id);
   }
@@ -34,18 +29,11 @@ class SingleProduct extends React.Component {
     const product = this.props.product;
     const userId = this.props.user.id;
     const isLoggedIn = this.props.isLoggedIn;
-    //console.log('SingleProduct props', this.props, product)
-    // return (
-    //   <div>
-    //     <img src={product.imageUrl}></img>
-    //     <h1>Name: {product.name}</h1>
-    //     <h2>Description: {product.description}</h2>
-    //     <h3>Price: ${product.price / 100}</h3>
-    //
+    
 
     return (
       <div>
-        <img src={product.imageUrl}></img>
+        <img src={product.imageUrl} className="single-product-image"></img>
         <h1>{product.name}</h1>
         <h2>{product.description}</h2>
         <h3>${product.price / 100}</h3>

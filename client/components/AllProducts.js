@@ -37,10 +37,10 @@ export class AllProducts extends React.Component {
           <div key={id} className='grid-item'>
             <Link to={`/products/${id}`}>
               <div className='link'>
-                <h2>Name: {name}</h2>
-                <h2>Price: ${price / 100}</h2>
-                <h2>Description: {description}</h2>
-                <img src={imageUrl} />
+                <h2>{name}</h2>
+                <img src={imageUrl} className="product-image"/>
+                <h2>${price / 100}</h2>
+                {/* <h2>Description: {description}</h2> */}
               </div>
             </Link>
             {this.props.isAdmin ? (
