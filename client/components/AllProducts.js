@@ -37,6 +37,7 @@ export class AllProducts extends React.Component {
                 <img src={imageUrl} className="product-image" />
                 <h2>${price / 100}</h2>
                 {/* <h2>Description: {description}</h2> */}
+                
               </div>
             </Link>
             {this.props.isAdmin ? (
@@ -58,6 +59,7 @@ export class AllProducts extends React.Component {
             <div className="grid-item-add-product">
               <AddProduct />
             </div>
+            <Link to="/users">View All Users</Link>
           </div>
         ) : (
           <div></div>

@@ -75,6 +75,7 @@ const mapState = (state) => {
     userId: state.auth.id,
     user: state.auth,
     itemsInCart: state.itemsInCart,
+    isAdmin: state.auth.isAdmin
   };
 };
 
