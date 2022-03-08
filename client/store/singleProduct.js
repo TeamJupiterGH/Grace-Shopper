@@ -1,10 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT';
-const EDIT_PRODUCT = 'EDIT_PRODUCT'
+const SET_SINGLE_PRODUCT = "SET_SINGLE_PRODUCT";
+const EDIT_PRODUCT = "EDIT_PRODUCT";
 
-const TOKEN = 'token';
-
+const TOKEN = "token";
 
 export const setSingleProduct = (product) => {
   return {
@@ -15,9 +14,9 @@ export const setSingleProduct = (product) => {
 export const _editProduct = (product) => {
   return {
     type: EDIT_PRODUCT,
-    product
-  }
-}
+    product,
+  };
+};
 
 export const fetchSingleProduct = (id) => {
   return async (dispatch) => {
@@ -41,7 +40,7 @@ export const editProduct = (product, history) => {
       });
       dispatch(_editProduct(data));
       //console.log('history --->', history)
-      //history.push(`/products/${product.id}`);
+      history.push("/products");
     } catch (error) {
       console.log(error);
     }
@@ -54,9 +53,9 @@ export default function productReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SINGLE_PRODUCT:
       return action.product;
-      case EDIT_PRODUCT:
-        console.log('reducer--->', action.product)
-        return action.product
+    case EDIT_PRODUCT:
+      console.log("reducer--->", action.product);
+      return action.product;
     default:
       return state;
   }
