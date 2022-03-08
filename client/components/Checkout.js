@@ -11,7 +11,7 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this is props!', this.props);
+    console.log('this is props in checkout!', this.props);
   }
   handleOrder() {
     const userId = this.props.user.id;
@@ -19,6 +19,7 @@ class Checkout extends React.Component {
     this.props.checkoutDispatch(userId, { complete: true });
     this.props.clearCart();
   }
+
   render() {
     const { handleOrder } = this;
     const { user } = this.props;
