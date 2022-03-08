@@ -13,6 +13,7 @@ import Checkout from "./components/Checkout";
 import Confirmation from "./components/Confirmation";
 import AllUsers from "./components/AllUsers"
 
+
 /**
  * COMPONENT
  */
@@ -53,7 +54,9 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/products/:id" component={SingleProduct} />
             <Route path="/products" exact component={AllProducts} />
-            <Route path="/guest/cart" component={Cart} />
+            <Route exact path="/guest/cart" component={Cart} />
+            <Route path="/guest/cart/checkout" component={Checkout} />
+            <Route path="/guest/cart/confirmation" component={Confirmation} />
           </Switch>
         )}
       </div>

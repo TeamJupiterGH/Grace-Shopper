@@ -13,7 +13,8 @@ export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts();
 
-    console.log("this is props!!", this.props);
+    if (this.props.isLoggedIn) {
+      console.log('got to isLoggedIn!!');
 
     if (this.props.isLoggedIn) {
       console.log("got to isLoggedIn!!");
@@ -24,8 +25,6 @@ export class AllProducts extends React.Component {
 
   render() {
     const { products } = this.props;
-
-    console.log("this is props inside render", this.props);
 
     return (
       <div className="grid-container">
