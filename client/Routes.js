@@ -14,7 +14,6 @@ import AddProduct from "./components/AddProduct";
 import Checkout from "./components/Checkout";
 import Confirmation from "./components/Confirmation";
 
-
 /**
  * COMPONENT
  */
@@ -44,11 +43,10 @@ class Routes extends Component {
               path="/users/:userId/confirmation"
               component={Confirmation}
             />
-
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={AllProducts} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/products/:id" component={SingleProduct} />
