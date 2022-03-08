@@ -6,7 +6,7 @@ import { addToCart } from "../store/cart";
 //import { addItemToGuestCart } from "../store/cartForGuest";
 import { EditProduct } from "./EditProduct";
 import { editProduct } from "../store/singleProduct";
-
+import { setSingleProduct } from "../store/singleProduct";
 class SingleProduct extends React.Component {
   constructor() {
     super();
@@ -20,30 +20,35 @@ class SingleProduct extends React.Component {
 
     this.props.addToCart(this.props.user.id, this.props.product);
   }
-  
+
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.id);
+  }
+  componentWillUnmount() {
+    this.props.clearProduct();
   }
 
   render() {
     const product = this.props.product;
     const userId = this.props.user.id;
     const isLoggedIn = this.props.isLoggedIn;
-    
 
     return (
-      <div>
+      <div id="main">
         <img src={product.imageUrl} className="single-product-image"></img>
         <h1>{product.name}</h1>
         <h2>{product.description}</h2>
         <h3>${product.price / 100}</h3>
         {isLoggedIn ? (
           <Link to={`/users/${userId}/cart`}>
-            <button onClick={this.handleClick}>Add to cart</button>
+            <button className="add" onClick={this.handleClick}>
+              Add to cart
+            </button>
           </Link>
         ) : (
           <Link to={`/guest/cart`}>
             <button
+              className="add"
               onClick={() => {
                 // *EB
                 product.quantity = 1;
@@ -72,7 +77,7 @@ class SingleProduct extends React.Component {
         {this.props.isAdmin ? (
           <div>
             <EditProduct
-              //history={this.props.history}
+              history={this.props.history}
               match={this.props.match}
               product={product}
               editProduct={this.props.editProduct}
@@ -102,6 +107,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     editProduct: (product, id) => dispatch(editProduct(product, id)),
     addToCart: (userId, item) => dispatch(addToCart(userId, item)),
+    clearProduct: () => dispatch(setSingleProduct({})),
   };
 };
 

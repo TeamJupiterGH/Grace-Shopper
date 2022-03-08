@@ -5,8 +5,14 @@ import { logout } from "../store";
 import { fetchCart } from "../store/cart";
 
 class Navbar extends React.Component {
+  componentDidUpdate(prevProp) {
+    if (prevProp.userId !== this.props.userId) {
+      this.props.fetchCart(this.props.userId);
+    }
+  }
   render() {
-    const { handleClick, isLoggedIn, userId, itemsInCart } = this.props;
+    console.log("USER ID IN NAV BAR RENDER", this.props.userId);
+    const { handleClick, isLoggedIn, userId, itemsInCart, user } = this.props;
     const productArr = itemsInCart.products || [];
 
     let totalItemsInCart = 0;
@@ -19,29 +25,42 @@ class Navbar extends React.Component {
     const numberOfItemsInCartLength = numberOfItemsInCart.length;
 
     return (
-      <div>
-        <h1>Half Baked</h1>
+      <div className="main">
+        <img src="https://i.imgur.com/U0V6pXZ.png" className="logo" />
         <nav>
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/products">Home</Link>
-              <a href="#" onClick={handleClick}>
+              <Link to="/products">
+                <span className="tab">Home</span>
+              </Link>
+              <span href="#" onClick={handleClick} className="tab">
                 Logout
-              </a>
-              <Link to={`/users/${userId}/cart`}>Cart({totalItemsInCart})</Link>
+              </span>
+              <Link to={`/users/${userId}/cart`}>
+                <span className="tab">Cart({totalItemsInCart})</span>
+              </Link>
+              <span className="greeting"> Welcome, {user.firstName}!</span>
             </div>
           ) : (
             <div>
               {/* The navbar will show these links before you log in */}
-              <Link to="/products">Home</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/guest/cart">Cart ({numberOfItemsInCartLength})</Link>
+              <Link to="/products">
+                <span className="tab">Home</span>
+              </Link>
+              <Link to="/login">
+                <span className="tab">Login</span>
+              </Link>
+              <Link to="/signup">
+                <span className="tab">Sign Up</span>
+              </Link>
+              <Link to="/guest/cart">
+                <span className="tab">Cart ({numberOfItemsInCartLength})</span>
+              </Link>
             </div>
           )}
         </nav>
-        <hr />
+        {/* <hr /> */}
       </div>
     );
   }
@@ -54,6 +73,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
+    user: state.auth,
     itemsInCart: state.itemsInCart,
     isAdmin: state.auth.isAdmin
   };
@@ -64,6 +84,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 

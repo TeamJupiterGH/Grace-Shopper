@@ -14,7 +14,7 @@ class Cart extends React.Component {
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
- 
+
   handleDeleteClick(item) {
     let tempCart = JSON.parse(localStorage.getItem("tempCart"));
     let itemId = item.id;
@@ -64,7 +64,7 @@ class Cart extends React.Component {
 
               <h3>Subtotal: ${subtotal / 100}</h3>
               <Link to={`/users/${this.props.user.id}/checkout`}>
-                <button>Check Out</button>
+                <button className="add">Check Out</button>
               </Link>
             </div>
           </div>
@@ -115,7 +115,10 @@ class Cart extends React.Component {
                     />
                   </form>
                   <div>${item.price / 100}/ea</div>
-                  <button onClick={() => this.handleDeleteClick(item)}>
+                  <button
+                    onClick={() => this.handleDeleteClick(item)}
+                    className="delete"
+                  >
                     Delete
                   </button>
                 </div>

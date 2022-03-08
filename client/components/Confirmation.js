@@ -17,7 +17,10 @@ class Confirmation extends React.Component {
             return (
               <div key={product.id}>
                 <br />
-                <img src={product.imageUrl} />
+                <img
+                  src={product.imageUrl}
+                  className="checkout-product-image"
+                />
                 <div>Name: {product.name}</div>
                 <div>Quantity: {product.order_details.quantity}</div>
                 <br />
