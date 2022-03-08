@@ -33,7 +33,7 @@ class SingleItemInCart extends React.Component {
     const { item, userId, match } = this.props;
     return (
       <div key={item.id}>
-        <h1>{item.name}</h1>
+        <h1 className="single-item-name">{item.name}</h1>
         <img src={item.imageUrl} className="checkout-product-image" />
         <form
           onChange={(event) => {
@@ -61,7 +61,7 @@ class SingleItemInCart extends React.Component {
           type="submit"
           onClick={() => this.props.deleteItemInCart(match.params.userId, item)}
         >
-          Delete
+          Remove
         </button>
         <hr />
       </div>
@@ -78,7 +78,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteItemInCart: (userId, item) =>
-      dispatch(deleteItemInCart(userId, item)),
+    dispatch(deleteItemInCart(userId, item)),
     updatedQuantity: (userId, item) => dispatch(updatedQuantity(userId, item)),
   };
 };

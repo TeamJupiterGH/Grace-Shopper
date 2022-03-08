@@ -33,9 +33,9 @@ export class AllProducts extends React.Component {
           <div key={id} className="grid-item">
             <Link to={`/products/${id}`}>
               <div className="link">
-                <h2>{name}</h2>
-                <img src={imageUrl} className="product-image" />
-                <h2>${price / 100}</h2>
+              <img src={imageUrl} className="product-image" />
+                <p className="product-name">{name}</p>
+                <p className="product-price">${price / 100}</p>
                 {/* <h2>Description: {description}</h2> */}
                 
               </div>
