@@ -76,12 +76,12 @@ class Cart extends React.Component {
     } else if (!this.props.isLoggedIn) {
       return (
         <div>
+        <h2 className="cart-name">My Cart</h2>
           <div>
             {arr.map((item, idx) => {
               subtotal += item.price * item.quantity;
               return (
                 <div>
-                  <h2 className="cart-name">My Cart</h2>
                   <div key={idx}>
                     <h3>{item.name}</h3>
                     <img src={item.imageUrl} className="cart-image" />
