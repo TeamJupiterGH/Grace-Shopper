@@ -5,7 +5,13 @@ import { logout } from "../store";
 import { fetchCart } from "../store/cart";
 
 class Navbar extends React.Component {
+  componentDidUpdate(prevProp) {
+    if (prevProp.userId !== this.props.userId) {
+      this.props.fetchCart(this.props.userId);
+    }
+  }
   render() {
+    console.log("USER ID IN NAV BAR RENDER", this.props.userId);
     const { handleClick, isLoggedIn, userId, itemsInCart, user } = this.props;
     const productArr = itemsInCart.products || [];
 
@@ -77,6 +83,7 @@ const mapDispatch = (dispatch) => {
     handleClick() {
       dispatch(logout());
     },
+    fetchCart: (userId) => dispatch(fetchCart(userId)),
   };
 };
 
