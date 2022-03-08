@@ -8,12 +8,10 @@ import SingleProduct from "./components/SingleProduct";
 import AllProducts from "./components/AllProducts";
 import Cart from "./components/Cart";
 import CartForGuest from "./components/CartForGuest";
-
 import AddProduct from "./components/AddProduct";
-
 import Checkout from "./components/Checkout";
 import Confirmation from "./components/Confirmation";
-
+import AllUsers from "./components/AllUsers"
 
 
 /**
@@ -45,11 +43,13 @@ class Routes extends Component {
               path="/users/:userId/confirmation"
               component={Confirmation}
             />
+            <Route path="/users" component={AllUsers} />
+
 
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={AllProducts} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/products/:id" component={SingleProduct} />

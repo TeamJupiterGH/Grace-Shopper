@@ -24,6 +24,7 @@ class Checkout extends React.Component {
     const { handleOrder } = this;
     const { user } = this.props;
 
+
     if (user.firstName) {
       return (
         <div>
@@ -71,6 +72,29 @@ class Checkout extends React.Component {
         </div>
       );
     }
+
+//     return (
+//       <div>
+//         <h3>
+//           Hi {user.firstName}, please enter an address and card number before
+//           ordering.
+//         </h3>
+//         <br />
+//         <form>
+//           <label htmlFor="address">Address </label>
+//           <input type="text" required name="address" />
+
+//           <label htmlFor="cardNumber">Card Number </label>
+//           <input type="text" required name="cardNumber" />
+//         </form>
+//         <Link to={`/users/${user.id}/confirmation`}>
+//           <button className="add" onClick={handleOrder}>
+//             Order
+//           </button>
+//         </Link>
+//       </div>
+//     );
+
   }
 }
 

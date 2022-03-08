@@ -1,18 +1,18 @@
 const router = require("express").Router();
-const { requireToken } = require("../api/authentication");
+const { requireToken, isAdmin } = require("../api/authentication");
 const {
   models: { User, Order, Order_Details, Product },
 } = require("../db");
 module.exports = router;
 
 //DO WE NEED REQUIRETOKEN HERE????
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ["id", "username"],
+      attributes: ["id", "username", "firstName","lastName", "email", "isAdmin" ],
     });
     res.json(users);
   } catch (err) {

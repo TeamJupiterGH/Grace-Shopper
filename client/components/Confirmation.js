@@ -53,6 +53,25 @@ class Confirmation extends React.Component {
             })}
             <h3>Subtotal: ${subtotal / 100}</h3>
           </div>
+
+//           {productArr.map((product) => {
+//             subtotal += product.price * product.order_details.quantity;
+//             return (
+//               <div key={product.id}>
+//                 <br />
+//                 <img
+//                   src={product.imageUrl}
+//                   className="checkout-product-image"
+//                 />
+//                 <div>Name: {product.name}</div>
+//                 <div>Quantity: {product.order_details.quantity}</div>
+//                 <br />
+//                 <hr />
+//               </div>
+//             );
+//           })}
+//           <h3>Subtotal: ${subtotal / 100}</h3>
+
         </div>
       );
     }
