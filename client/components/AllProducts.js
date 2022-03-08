@@ -1,24 +1,23 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchProducts, deleteProduct } from '../store/products';
-import { fetchCart } from '../store/cart';
-import AddProduct from './AddProduct';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchProducts, deleteProduct } from "../store/products";
+import { fetchCart } from "../store/cart";
+import AddProduct from "./AddProduct";
 
 export class AllProducts extends React.Component {
-
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   componentDidMount() {
     this.props.getProducts();
 
-    console.log('this is props!!', this.props);
-   
+    console.log("this is props!!", this.props);
+
     if (this.props.isLoggedIn) {
-      console.log('got to isLoggedIn!!');
-      // this.props.fetchCart(1);
+      console.log("got to isLoggedIn!!");
+
       this.props.fetchCart(this.props.user.id);
     }
   }
@@ -26,25 +25,23 @@ export class AllProducts extends React.Component {
   render() {
     const { products } = this.props;
 
-    //console.log('AllProducts Props', this.props)
-
-
-    console.log('this is props inside render', this.props);
+    console.log("this is props inside render", this.props);
 
     return (
-      <div className='grid-container'>
+      <div className="grid-container">
         {products.map(({ id, name, price, description, imageUrl }) => (
-          <div key={id} className='grid-item'>
+          <div key={id} className="grid-item">
             <Link to={`/products/${id}`}>
-              <div className='link'>
+              <div className="link">
                 <h2>{name}</h2>
-                <img src={imageUrl} className="product-image"/>
+                <img src={imageUrl} className="product-image" />
                 <h2>${price / 100}</h2>
                 {/* <h2>Description: {description}</h2> */}
               </div>
             </Link>
             {this.props.isAdmin ? (
               <button
+                className="delete"
                 onClick={() => {
                   this.props.deleteProduct(id);
                 }}
@@ -58,8 +55,8 @@ export class AllProducts extends React.Component {
         ))}
         {this.props.isAdmin ? (
           <div>
-            <div className='grid-item-add-product'>
-            <AddProduct />
+            <div className="grid-item-add-product">
+              <AddProduct />
             </div>
           </div>
         ) : (

@@ -9,8 +9,8 @@ class SingleItemInCart extends React.Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
   componentDidMount() {
-    console.log('single cart item');
-    this.setState({quantity: this.props.item.order_details.quantity})
+    console.log("single cart item");
+    this.setState({ quantity: this.props.item.order_details.quantity });
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -34,7 +34,7 @@ class SingleItemInCart extends React.Component {
     return (
       <div key={item.id}>
         <h1>{item.name}</h1>
-        <img src={item.imageUrl} />
+        <img src={item.imageUrl} className="checkout-product-image" />
         <form
           onChange={(event) => {
             event.preventDefault();
@@ -57,6 +57,7 @@ class SingleItemInCart extends React.Component {
         </form>
         <div>${item.price / 100}/ea</div>
         <button
+          className="delete"
           type="submit"
           onClick={() => this.props.deleteItemInCart(match.params.userId, item)}
         >
