@@ -124,6 +124,9 @@ class Cart extends React.Component {
           </div>
           <br />
           <h3>Subtotal: ${subtotal / 100}</h3>
+          <Link to={`/guest/cart/checkout`}>
+                <button>Check Out</button>
+              </Link>
         </div>
       );
     }
