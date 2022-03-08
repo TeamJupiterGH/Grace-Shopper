@@ -42,6 +42,9 @@ export const addToCart = (userId, item) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
+
+      //req.body = {firstName: "Sara", lastName:"S", email:"ss@gmail.com", tempCart: [localStorage]}
+      //item => {...item, tempCart: [localStorage]}
       const { data } = await axios.post(`/api/users/${userId}/cart`, item, {
         headers: {
           authorization: token,
