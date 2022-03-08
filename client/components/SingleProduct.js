@@ -6,7 +6,6 @@ import { addToCart } from "../store/cart";
 //import { addItemToGuestCart } from "../store/cartForGuest";
 import { EditProduct } from "./EditProduct";
 import { editProduct } from "../store/singleProduct";
-import { AllUsers } from "./AllUsers"
 
 class SingleProduct extends React.Component {
   constructor() {
@@ -78,7 +77,6 @@ class SingleProduct extends React.Component {
               product={product}
               editProduct={this.props.editProduct}
             />
-            All Users
           </div>
         ) : (
           <div></div>

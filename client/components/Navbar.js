@@ -55,6 +55,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
     itemsInCart: state.itemsInCart,
+    isAdmin: state.auth.isAdmin
   };
 };
 
