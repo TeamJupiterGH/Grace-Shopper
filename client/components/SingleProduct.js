@@ -36,9 +36,9 @@ class SingleProduct extends React.Component {
     return (
       <div id="main">
         <img src={product.imageUrl} className="single-product-image"></img>
-        <h1>{product.name}</h1>
-        <h2>{product.description}</h2>
-        <h3>${product.price / 100}</h3>
+        <h2 className="single-product-name">{product.name}</h2>
+        <p>{product.description}</p>
+        <p>${product.price / 100}</p>
         {isLoggedIn ? (
           <Link to={`/users/${userId}/cart`}>
             <button className="add" onClick={this.handleClick}>
