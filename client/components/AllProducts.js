@@ -13,7 +13,8 @@ export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts();
 
-    console.log("this is props!!", this.props);
+    if (this.props.isLoggedIn) {
+      console.log('got to isLoggedIn!!');
 
     if (this.props.isLoggedIn) {
       console.log("got to isLoggedIn!!");
@@ -25,18 +26,17 @@ export class AllProducts extends React.Component {
   render() {
     const { products } = this.props;
 
-    console.log("this is props inside render", this.props);
-
     return (
       <div className="grid-container">
         {products.map(({ id, name, price, description, imageUrl }) => (
           <div key={id} className="grid-item">
             <Link to={`/products/${id}`}>
               <div className="link">
-                <h2>{name}</h2>
-                <img src={imageUrl} className="product-image" />
-                <h2>${price / 100}</h2>
+              <img src={imageUrl} className="product-image" />
+                <p className="product-name">{name}</p>
+                <p className="product-price">${price / 100}</p>
                 {/* <h2>Description: {description}</h2> */}
+                
               </div>
             </Link>
             {this.props.isAdmin ? (
@@ -58,6 +58,7 @@ export class AllProducts extends React.Component {
             <div className="grid-item-add-product">
               <AddProduct />
             </div>
+            <Link to="/users">View All Users</Link>
           </div>
         ) : (
           <div></div>

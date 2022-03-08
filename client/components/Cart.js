@@ -51,7 +51,8 @@ class Cart extends React.Component {
       ) {
         return (
           <div>
-            <div>
+            <h2 className="cart-name">My Cart</h2>
+            <div className="cart-grid">
               {this.props.itemsInCart.products.map((item) => {
                 subtotal += item.price * item.order_details.quantity;
 
@@ -79,54 +80,60 @@ class Cart extends React.Component {
             {arr.map((item, idx) => {
               subtotal += item.price * item.quantity;
               return (
-                <div key={idx}>
-                  <h1>{item.name}</h1>
-                  <img src={item.imageUrl} />
-                  <form
-                    onChange={(event) => {
-                      event.preventDefault();
-                      let updatedQTY = event.target.value;
-                      let itemId = item.id;
-                      let existingCart = JSON.parse(
-                        localStorage.getItem("tempCart")
-                      );
-                      let updatedCart = existingCart.map((product) => {
-                        if (product.id === itemId) {
-                          return { ...product, quantity: updatedQTY };
-                        } else {
-                          return product;
-                        }
-                      });
-                      localStorage.setItem(
-                        "tempCart",
-                        JSON.stringify(updatedCart)
-                      );
-                      this.handleOnChange(event);
-                    }}
-                  >
-                    <label htmlFor="quantity">Quantity</label>
-                    <input
-                      type="number"
-                      min={0}
-                      step={1}
-                      name="quantity"
-                      value={item.quantity}
-                      onChange={this.handleOnChange}
-                    />
-                  </form>
-                  <div>${item.price / 100}/ea</div>
-                  <button
-                    onClick={() => this.handleDeleteClick(item)}
-                    className="delete"
-                  >
-                    Delete
-                  </button>
+                <div>
+                  <h2 className="cart-name">My Cart</h2>
+                  <div key={idx}>
+                    <h3>{item.name}</h3>
+                    <img src={item.imageUrl} className="cart-image" />
+                    <form
+                      onChange={(event) => {
+                        event.preventDefault();
+                        let updatedQTY = event.target.value;
+                        let itemId = item.id;
+                        let existingCart = JSON.parse(
+                          localStorage.getItem("tempCart")
+                        );
+                        let updatedCart = existingCart.map((product) => {
+                          if (product.id === itemId) {
+                            return { ...product, quantity: updatedQTY };
+                          } else {
+                            return product;
+                          }
+                        });
+                        localStorage.setItem(
+                          "tempCart",
+                          JSON.stringify(updatedCart)
+                        );
+                        this.handleOnChange(event);
+                      }}
+                    >
+                      <label htmlFor="quantity">Quantity</label>
+                      <input
+                        type="number"
+                        min={0}
+                        step={1}
+                        name="quantity"
+                        value={item.quantity}
+                        onChange={this.handleOnChange}
+                      />
+                    </form>
+                    <div>${item.price / 100}/ea</div>
+                    <button
+                      onClick={() => this.handleDeleteClick(item)}
+                      className="delete"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               );
             })}
           </div>
           <br />
           <h3>Subtotal: ${subtotal / 100}</h3>
+          <Link to={`/guest/cart/checkout`}>
+                <button>Check Out</button>
+              </Link>
         </div>
       );
     }

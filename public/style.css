@@ -26,6 +26,7 @@ form div {
   grid-row-gap: 50px;
   grid-template-columns: auto auto auto;
   padding: 50px;
+  
 }
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
@@ -33,6 +34,7 @@ form div {
   padding: 20px;
   font-size: 30px;
   text-align: center;
+  
 }
 .grid-item-add-product {
   background-color: rgba(255, 255, 255, 0.8);
@@ -63,16 +65,31 @@ form div {
   padding-top: 5px;
 }
 
+.product-name {
+  font-size: 20;
+}
+
+.product-price {
+  font-size: 15;
+}
+
 .single-product-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 350px;
+  height: 300px;
   padding-top: 5px;
 }
 
+.single-product-name {
+  font-family: serif;
+  text-align: center;
+}
+
 .checkout-product-image{
-  height: 350px;
+  display: block;
+  height: 100px;
+  padding-top: 5px;
 }
 
 .logo{
@@ -94,6 +111,7 @@ form div {
 #main{
   margin-top: 50px;
 }
+
 nav{
 
 margin-top: 110px;
@@ -145,4 +163,21 @@ button:hover{
 }
 .grid-item:hover{
   background: #fdba77;
+}
+
+
+.single-item-name {
+  font-size: 16px;
+}
+
+.cart-name {
+  text-align: center;
+}
+
+.cart-image {
+  display: block;
+  /* margin-left: auto; */
+  margin-right: auto;
+  height: 150px;
+  padding-top: 5px;
 }
