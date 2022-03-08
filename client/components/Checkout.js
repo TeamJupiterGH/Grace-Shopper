@@ -21,7 +21,7 @@ class Checkout extends React.Component {
     return (
       <div>
         <h3>
-          Hi {user.firstName}, please enter address and card number before
+          Hi {user.firstName}, please enter an address and card number before
           ordering.
         </h3>
         <br />
@@ -33,7 +33,9 @@ class Checkout extends React.Component {
           <input type="text" required name="cardNumber" />
         </form>
         <Link to={`/users/${user.id}/confirmation`}>
-          <button onClick={handleOrder}>Order</button>
+          <button className="add" onClick={handleOrder}>
+            Order
+          </button>
         </Link>
       </div>
     );

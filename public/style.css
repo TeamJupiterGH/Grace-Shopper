@@ -70,3 +70,79 @@ form div {
   height: 350px;
   padding-top: 5px;
 }
+
+.checkout-product-image{
+  height: 350px;
+}
+
+.logo{
+  align-items: center;
+  height: 100px;
+  width: 150px;
+
+  position:absolute;
+  top: 6.5%;
+  left:50%;
+  margin-top:-50px; /* this is half the height of your div*/
+  margin-left:-100px; /*this is half of width of your div*/
+}
+
+#add-product-form{
+  text-align: center;
+}
+
+#main{
+  margin-top: 50px;
+}
+nav{
+
+margin-top: 110px;
+background-color: #ec7e10;
+  text-decoration: none;
+  color: white;
+  position: sticky;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+span{
+  text-decoration: none;
+  color: white;
+}
+.tab:hover{
+  background-color: #f3a04c;
+  border: 2px solid white;
+  padding: 11px 2px;
+}
+.greeting{
+  color: black;
+  font-family: cursive;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+button{
+  font-size: 18px;
+  background-color: #e69e56;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+button:hover{
+  background-color: rgb(248, 203, 2);
+}
+.delete:hover{
+  background: red;
+
+}
+.add:hover{
+  background: rgb(135, 228, 135);
+}
+.grid-item:hover{
+  background: #fdba77;
+}
