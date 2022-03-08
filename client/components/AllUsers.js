@@ -5,22 +5,30 @@ import { fetchUsers } from "../store/users";
 export class AllUsers extends React.Component {
   componentDidMount() {
     this.props.getUsers();
+    // co(this.props.isLoggedIn) {
+    //     this.props.getUsers()
+    // }
   }
 
   render() {
-    const { users } = this.props;
+    const { users } = this.props || [];
     console.log("users props", this.props);
 
     return (
       <div className="users">
-        {users.map(({ username }) => (
-          //   <div key={id} className='grid-item'>
-          <h2>{username}</h2>
-          // {/* <h2>{firstName}</h2>
-          // <h2>{lastName}</h2>
-          // <h2>{email}</h2>
-          // <h2>{isAdmin}</h2> */}
-        ))}
+          
+    {this.props.isAdmin ? (
+        <ul>
+        {users.map(({ id, username, firstName, lastName, email, isAdmin }) => (
+            <li key={id}>
+                <h3>{firstName} {lastName}</h3>
+                <h3>Username: {username}</h3>
+                <h3>Email: {email}</h3>
+            </li>
+    ))} </ul>
+        ) : (
+            <div></div>
+        )}
       </div>
     );
   }
@@ -29,6 +37,9 @@ export class AllUsers extends React.Component {
 const mapState = (state) => {
   return {
     users: state.users,
+    user: state.auth,
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.isAdmin
   };
 };
 

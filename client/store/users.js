@@ -15,10 +15,14 @@ export const setUsers = (users) => {
 
 export const fetchUsers = () => {
   return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
     try {
-      const { data } = await axios.get("/api/users");
+      const { data } = await axios.get("/api/users", {
+        headers: {
+            authorization: token,
+      }
+    });
       dispatch(setUsers(data));
-      console.log('userssss', data)
     } catch (err) {
       console.log(err);
     }

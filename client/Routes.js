@@ -43,6 +43,7 @@ class Routes extends Component {
               path="/users/:userId/confirmation"
               component={Confirmation}
             />
+            <Route path="/users" component={AllUsers} />
 
           </Switch>
         ) : (
@@ -52,7 +53,6 @@ class Routes extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/products/:id" component={SingleProduct} />
             <Route path="/products" exact component={AllProducts} />
-            <Route path="/users" exact component={AllUsers} />
             <Route path="/guest/cart" component={Cart} />
           </Switch>
         )}
