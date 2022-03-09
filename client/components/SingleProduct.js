@@ -14,10 +14,6 @@ class SingleProduct extends React.Component {
     // this.handleUpdate = this.handleUpdate.bind(this);
   }
   handleClick() {
-    //console.log("add to cart is clicked");
-
-    //   console.log("add to cart is clicked");
-
     this.props.addToCart(this.props.user.id, this.props.product);
   }
 
@@ -50,9 +46,7 @@ class SingleProduct extends React.Component {
             <button
               className="add"
               onClick={() => {
-                // *EB
                 product.quantity = 1;
-                //
                 if (!localStorage.tempCart) {
                   localStorage.setItem("tempCart", JSON.stringify([product]));
                 } else {
@@ -63,10 +57,10 @@ class SingleProduct extends React.Component {
                   if (ids.indexOf(product.id) === -1) {
                     arr.push(product);
                   } else {
-                    console.log("got to else!");
                     product.quantity++;
                   }
                   localStorage.setItem("tempCart", JSON.stringify(arr));
+                  console.log('this is this.state!!!!', this.state)
                 }
               }}
             >

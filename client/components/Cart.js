@@ -38,10 +38,10 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log(
-      "ITEMS IN CART IN CART.JS RENDER",
-      this.props.itemsInCart.products
-    );
+    // console.log(
+    //   "ITEMS IN CART IN CART.JS RENDER",
+    //   this.props.itemsInCart.products
+    // );
     const arr = JSON.parse(localStorage.getItem("tempCart")) || [];
     let subtotal = 0;
     if (this.props.isLoggedIn) {
