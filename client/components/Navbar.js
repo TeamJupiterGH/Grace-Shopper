@@ -61,7 +61,7 @@ class Navbar extends React.Component {
                 <span className="tab">Sign Up</span>
               </Link>
               <Link to="/guest/cart">
-                <span className="tab">Cart ({numberOfItemsInCartLength})</span>
+                <span className="tab">Cart</span>
                 {/* <span className="tab">Cart ({numberOfItemsInCartLength})</span> */}
               </Link>
             </div>

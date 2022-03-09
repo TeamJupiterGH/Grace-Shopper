@@ -64,10 +64,10 @@ class Confirmation extends React.Component {
                 </div>
               );
             })}
-            {/* <h3>Subtotal: ${subtotal / 100}</h3> */}
+            <h3>Subtotal: ${subtotal / 100}</h3>
             
           </div>
-          {localStorage.clear()}
+          {/* {localStorage.clear()} */}
         </div>
       );
     }
