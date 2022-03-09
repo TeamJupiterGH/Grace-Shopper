@@ -1,11 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 
 //ACTION TYPE--------------
-const ADD_TO_CART = "ADD_TO_CART";
-const GET_CART = "GET_CART";
-const DELETE_ITEM_IN_CART = "DELETE_ITEM_IN_CART";
-const UPDATE_QUANTITY = "UPDATE_QUANTITY";
-const TOKEN = "token";
+const ADD_TO_CART = 'ADD_TO_CART';
+const GET_CART = 'GET_CART';
+const GET_GUEST_CART = 'GET_GUEST_CART';
+const DELETE_ITEM_IN_CART = 'DELETE_ITEM_IN_CART';
+const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
+const TOKEN = 'token';
 const token = window.localStorage.getItem(TOKEN);
 
 //ACTION CREATOR---------------
@@ -19,6 +20,13 @@ const _addToCart = (item) => {
 export const getCart = (items) => {
   return {
     type: GET_CART,
+    items,
+  };
+};
+
+export const getGuestCart = (items) => {
+  return {
+    type: GET_GUEST_CART,
     items,
   };
 };
@@ -73,6 +81,18 @@ export const fetchCart = (userId) => {
   };
 };
 
+export const fetchGuestCart = (guestId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`/api/guests/${guestId}/cart`);
+      console.log('this is fetch guest cart data!!!--->', data);
+      dispatch(getGuestCart(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const deleteItemInCart = (userId, item) => {
   return async (dispatch) => {
     try {
@@ -116,7 +136,9 @@ const initialState = {};
 export default function addToCartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      console.log("get cart state-----", action.items);
+      return action.items;
+    case GET_GUEST_CART:
+      console.log('get guest cart state-----', action.items);
       return action.items;
     case ADD_TO_CART:
       return action.item;

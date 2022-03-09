@@ -5,13 +5,19 @@ import { logout } from "../store";
 import { fetchCart } from "../store/cart";
 
 class Navbar extends React.Component {
+  
+  componentDidMount() {
+    console.log('mounted');
+  }
+
+  // console.log('this.props in navbarrr!', this.props)
   componentDidUpdate(prevProp) {
     if (prevProp.userId !== this.props.userId) {
       this.props.fetchCart(this.props.userId);
     }
   }
   render() {
-    console.log("USER ID IN NAV BAR RENDER", this.props.userId);
+    console.log("USER ID IN NAV BAR RENDER", this.props);
     const { handleClick, isLoggedIn, userId, itemsInCart, user } = this.props;
     const productArr = itemsInCart.products || [];
 
@@ -56,6 +62,7 @@ class Navbar extends React.Component {
               </Link>
               <Link to="/guest/cart">
                 <span className="tab">Cart ({numberOfItemsInCartLength})</span>
+                {/* <span className="tab">Cart ({numberOfItemsInCartLength})</span> */}
               </Link>
             </div>
           )}
@@ -73,6 +80,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     userId: state.auth.id,
+    guestId: state.guestCheckout,
     user: state.auth,
     itemsInCart: state.itemsInCart,
     isAdmin: state.auth.isAdmin
@@ -85,6 +93,7 @@ const mapDispatch = (dispatch) => {
       dispatch(logout());
     },
     fetchCart: (userId) => dispatch(fetchCart(userId)),
+    fetchGuestCart: (guestId) => dispatch(fetchGuestCart(guestId))
   };
 };
 

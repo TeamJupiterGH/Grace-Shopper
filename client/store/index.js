@@ -7,6 +7,7 @@ import auth from "./auth";
 import productReducer from "./singleProduct";
 import addToCartReducer from "./cart";
 import checkoutReducer from "./checkout";
+import guestCheckoutReducer from "./guestCheckout";
 import usersReducer from "./users";
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   product: productReducer,
   itemsInCart: addToCartReducer,
   checkout: checkoutReducer,
+  guestCheckout: guestCheckoutReducer,
   users: usersReducer,
 });
 const middleware = composeWithDevTools(
